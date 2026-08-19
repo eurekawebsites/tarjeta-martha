@@ -163,22 +163,42 @@
       outline-offset: 3px;
     }
 
+    /* Equal visual tile system.
+       Both choices share one outer aspect ratio so they read as a matched pair.
+       No source image files are modified. */
+    .choice {
+      aspect-ratio: 879 / 380;
+    }
+
     .choice img {
       width: 100%;
-      height: auto;
+      max-width: none;
       border-radius: 34px;
     }
 
-    /* Mercado Negro source image contains ~34px of cream canvas above
-       the actual card. Crop that canvas here without modifying the asset. */
-    .choice--mn {
-      aspect-ratio: 879 / 368;
+    /* Coordenada is naturally a little taller. Crop mostly from the quiet
+       upper area, preserving the suitcase, compass/ticket and arrow. */
+    .choice--cv img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center 76%;
     }
+
+    /* Mercado Negro source image contains ~34px of cream canvas above
+       the actual card. Crop that canvas out while filling the same
+       879:380 tile, without modifying the source asset. */
     .choice--mn img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center bottom;
+    }
+
+    /* Re-establish a clean common edge after the controlled crops. */
+    .choice--cv,
+    .choice--mn {
+      border: 1px solid rgba(185, 139, 52, 0.32);
+      background: #F4EEE3;
     }
 
     footer {
@@ -240,7 +260,7 @@
 
     <div class="choices">
 
-      <a class="choice" href="./tarjeta-martha-cv.html" aria-label="Coordenada Viajes — ver tarjeta digital">
+      <a class="choice choice--cv" href="./tarjeta-martha-cv.html" aria-label="Coordenada Viajes — ver tarjeta digital">
         <img
           src="hub-assets/cards/coordenada-viajes.webp"
           alt="Coordenada Viajes — Agencia de viajes"
