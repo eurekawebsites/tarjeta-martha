@@ -1,0 +1,49 @@
+:root {
+  /* ══════════════════════════════════════════════════════════
+     Mercado Negro — canonical UI palette
+     Derived directly from the approved Mercado Negro card shown
+     on the Martha Domínguez hub (hub-assets/cards/mercado-negro.*).
+     Values are sampled from that artwork, not invented — see
+     MN-BRAND-NOTES.md for the derivation.
+     ══════════════════════════════════════════════════════════ */
+
+  --mn-charcoal:      #121210; /* primary background */
+  --mn-charcoal-2:    #1a1714; /* elevated surface / card body */
+  --mn-chocolate:     #1c1712; /* secondary surface, photography-adjacent tone */
+  --mn-gold:          #c9a876; /* antique gold — accents, rules, borders, ornament */
+  --mn-gold-bright:   #e4cfa0; /* gold highlight, hover states */
+  --mn-gold-dim:      rgba(201,168,118,0.35);
+  --mn-cream:         #f5f0e6; /* primary light text / contrast */
+  --mn-cream-muted:   rgba(245,240,230,0.62);
+  --mn-cream-faint:   rgba(245,240,230,0.4);
+  --mn-rose:          #8b6b6a; /* restrained muted dusty rose — supporting accent only */
+  --mn-rose-dim:      rgba(139,107,106,0.28);
+  --mn-border:        rgba(201,168,118,0.22);
+
+  /* Typography */
+  --mn-serif:        'EB Garamond', Georgia, 'Times New Roman', serif; /* brand / major headings */
+  --mn-serif-italic:  'EB Garamond', Georgia, serif; /* emotional/editorial copy, italic */
+  --mn-sans:          Arial, Helvetica, sans-serif; /* functional / UI text */
+
+  /* Shared geometry */
+  --mn-radius:        10px;
+  --mn-radius-sm:      6px;
+  --mn-section-space: 88px;
+  --mn-shadow-card:   0 20px 48px -20px rgba(0,0,0,0.6);
+}
+
+/*
+IMPORTANT:
+- The MN ornamental crest seen on the approved hub card is NOT available
+  as a standalone production asset anywhere in this project. Do not crop
+  it out of the composite hub-assets/cards/mercado-negro.* image files
+  for production use — that artwork is licensed/approved only as a
+  finished composite, not as a source for extracting a logo mark.
+- Until a standalone crest file is supplied, brand surfaces use the
+  legacy circular Mercado Negro / Martha Domínguez mark
+  (images/mercado-negro-logo.png) at reduced/secondary visual weight,
+  plus a typographic "MERCADO NEGRO" wordmark in --mn-serif as the
+  primary brand treatment.
+- Do not recolor or redraw either mark to force-match these flat UI
+  tokens.
+*/
