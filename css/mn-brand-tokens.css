@@ -1,25 +1,41 @@
 :root {
   /* ══════════════════════════════════════════════════════════
      Mercado Negro — canonical UI palette
-     APPROVED OPTION 1 (locked): black/near-black + cream/ivory is
-     primary; antique gold is a restrained accent only. No brown/
-     chocolate-forward surfaces. Values match
-     brand-option1/tokens/mn-brand-tokens.json exactly (the supplied
-     source of truth) — see MN-BRAND-NOTES.md for direction history.
+     APPROVED: Option 1 logo structure + Option C UI palette
+     (Black + Champagne) — locked. Black/near-black dominant,
+     ivory is the primary text/logo color, champagne is a
+     restrained accent only. No brown/chocolate-forward surfaces,
+     no dusty-rose primary CTA. Values match
+     brand-optionc/tokens/mn-brand-tokens.json exactly (the
+     supplied source of truth) — see MN-BRAND-NOTES.md for full
+     direction history.
      ══════════════════════════════════════════════════════════ */
 
   --mn-black:         #090908; /* deepest background tier */
   --mn-charcoal:      #121210; /* primary background */
-  --mn-charcoal-2:    #1a1714; /* elevated surface / card body */
-  --mn-gold:          #c9a876; /* antique gold — restrained accent/detail only */
-  --mn-gold-bright:   #e4cfa0; /* gold highlight, hover states */
-  --mn-gold-dim:      rgba(201,168,118,0.35);
-  --mn-cream:         #f5f0e6; /* primary light text / contrast, dominant logo/text color */
+  --mn-panel:         #0D0D0D; /* card/panel surface */
+  --mn-panel-2:       #111111; /* slightly elevated panel surface */
+  --mn-ivory:         #F5F0E6; /* primary text/logo color */
+  --mn-champagne:     #D8C79E; /* restrained accent — borders, rules, labels */
+  --mn-champagne-soft: #C9B88B; /* secondary/muted champagne */
+  --mn-divider:       rgba(216,199,158,0.52);
+
+  --mn-button-fill:       #101010;
+  --mn-button-fill-hover: #151515;
+  --mn-button-border:     #D8C79E;
+  --mn-button-text:       #F5F0E6;
+
+  /* Back-compat aliases — older markup in this project may still
+     reference these names; keep them mapped onto the Option C values
+     so nothing silently reverts to the superseded brown/rose palette. */
+  --mn-cream:         var(--mn-ivory);
   --mn-cream-muted:   rgba(245,240,230,0.62);
   --mn-cream-faint:   rgba(245,240,230,0.4);
-  --mn-rose:          #8b6b6a; /* restrained dusty rose — primary CTA accent only, if useful */
-  --mn-rose-dim:      rgba(139,107,106,0.28);
-  --mn-border:        rgba(201,168,118,0.22);
+  --mn-gold:          var(--mn-champagne);
+  --mn-gold-bright:   #e8dcb8;
+  --mn-gold-dim:      rgba(216,199,158,0.35);
+  --mn-border:        rgba(216,199,158,0.28);
+  --mn-charcoal-2:    var(--mn-panel-2);
 
   /* Typography */
   --mn-script:         'Alex Brush', cursive; /* brand wordmark — "Mercado Negro" (baked into the approved lockup image) */
@@ -35,26 +51,25 @@
 }
 
 /*
-IMPORTANT — APPROVED OPTION 1 (locked direction, supersedes earlier passes):
-- Primary brand mark = brand-option1/logo/mercado-negro-option1-full-lockup-transparent.webp
-  (seal + script "Mercado Negro" + fine gold divider + "BY MARTHA
-  DOMÍNGUEZ" byline, one flattened image). Use on dark surfaces.
-  Fallback exact-black-background master:
-  mercado-negro-option1-full-lockup-black.webp
-- Compact/secondary uses (favicon, nav, social badge) =
-  brand-option1/logo/mercado-negro-option1-seal-transparent.webp
-  (or -black.webp on an exact-black surface). Do not squeeze the full
-  tall lockup into small icon slots — use the seal.
-- These are supplied, approved, production assets. Do NOT redraw,
-  simplify, restyle, trace, regenerate, or substitute them.
-- Background must be black/near-black dominant (--mn-black /
-  --mn-charcoal). Do NOT use brown/chocolate-forward panels or
-  backgrounds — that was an earlier, superseded direction.
-- Gold is a restrained accent/detail only — rules, borders, small
-  text — not a dominant fill.
+IMPORTANT — APPROVED: Option 1 logo + Option C UI palette (locked,
+supersedes all earlier passes):
+- Logo structure is UNCHANGED from Option 1 — same seal + script
+  "Mercado Negro" + gold divider + "BY MARTHA DOMÍNGUEZ" byline,
+  one flattened lockup image. Primary mark =
+  brand-optionc/logo/mercado-negro-option1-full-lockup-transparent.webp
+  Compact/secondary uses (favicon, nav, social) = the seal alone,
+  brand-optionc/logo/mercado-negro-option1-seal-transparent.webp
+- UI palette is Option C: black/near-black dominant, ivory primary
+  text, champagne restrained accent only. NO brown/chocolate-forward
+  surfaces anywhere (that was the second pass, fully superseded).
+  NO dusty-rose primary CTA (that was the third-pass/Option-1-UI
+  pass, also superseded for buttons specifically).
+- Primary CTA = --mn-button-fill (near-black) fill,
+  --mn-button-border (champagne) border, --mn-button-text (ivory)
+  text — an outline-style button, not a filled color block.
+- These are supplied, approved, production assets/tokens. Do NOT
+  redraw the logo, and do NOT reintroduce brown/chocolate panels or
+  rose-filled buttons.
 - Service descriptors ("PASTELERÍA & CATERING") and taglines stay as
   live HTML text beneath the logo lockup, not baked into the logo file.
-- Earlier assets under css/mn-brand-tokens-history (if present) and
-  brand/ (Option "seal + script" pass) are superseded by
-  brand-option1/ — kept only as legacy reference, not for active use.
 */

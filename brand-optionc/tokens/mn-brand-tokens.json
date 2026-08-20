@@ -1,0 +1,21 @@
+{
+  "direction_name": "Option C — Black + Champagne",
+  "mn_black": "#090908",
+  "mn_charcoal": "#121210",
+  "mn_panel": "#0D0D0D",
+  "mn_panel_2": "#111111",
+  "mn_ivory": "#F5F0E6",
+  "mn_champagne": "#D8C79E",
+  "mn_champagne_soft": "#C9B88B",
+  "mn_divider": "rgba(216, 199, 158, 0.52)",
+  "mn_button_fill_default": "#101010",
+  "mn_button_border": "#D8C79E",
+  "mn_button_text": "#F5F0E6",
+  "notes": [
+    "Black/near-black is dominant.",
+    "Ivory is the primary text/logo color.",
+    "Champagne is a restrained accent.",
+    "No brown/chocolate-forward visible branding.",
+    "No dusty-rose primary buttons in this direction."
+  ]
+}

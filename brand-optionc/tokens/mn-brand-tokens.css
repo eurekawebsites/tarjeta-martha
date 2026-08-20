@@ -1,0 +1,23 @@
+:root {
+  --mn-black: #090908;
+  --mn-charcoal: #121210;
+  --mn-panel: #0D0D0D;
+  --mn-panel-2: #111111;
+  --mn-ivory: #F5F0E6;
+  --mn-champagne: #D8C79E;
+  --mn-champagne-soft: #C9B88B;
+  --mn-divider: rgba(216, 199, 158, 0.52);
+
+  --mn-button-fill: #101010;
+  --mn-button-fill-hover: #151515;
+  --mn-button-border: #D8C79E;
+  --mn-button-text: #F5F0E6;
+
+  /* SELECTED DIRECTION: Option C — Black + Champagne
+     - black / near-black is dominant
+     - ivory is the primary logo/text color
+     - champagne is a restrained accent
+     - no brown/chocolate-forward visible styling
+     - no dusty-rose primary CTA styling
+  */
+}
