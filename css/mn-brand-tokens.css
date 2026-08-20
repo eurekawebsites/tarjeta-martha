@@ -1,27 +1,28 @@
 :root {
   /* ══════════════════════════════════════════════════════════
      Mercado Negro — canonical UI palette
-     Client-approved brand direction: round seal + script "Mercado
-     Negro" wordmark + "BY MARTHA DOMÍNGUEZ" byline. Values match
-     brand/mn-brand-tokens.json exactly (the supplied source of
-     truth) — see MN-BRAND-NOTES.md for history/derivation.
+     APPROVED OPTION 1 (locked): black/near-black + cream/ivory is
+     primary; antique gold is a restrained accent only. No brown/
+     chocolate-forward surfaces. Values match
+     brand-option1/tokens/mn-brand-tokens.json exactly (the supplied
+     source of truth) — see MN-BRAND-NOTES.md for direction history.
      ══════════════════════════════════════════════════════════ */
 
+  --mn-black:         #090908; /* deepest background tier */
   --mn-charcoal:      #121210; /* primary background */
   --mn-charcoal-2:    #1a1714; /* elevated surface / card body */
-  --mn-chocolate:     #1c1712; /* secondary surface, photography-adjacent tone */
-  --mn-gold:          #c9a876; /* antique gold — accents, rules, borders, ornament */
+  --mn-gold:          #c9a876; /* antique gold — restrained accent/detail only */
   --mn-gold-bright:   #e4cfa0; /* gold highlight, hover states */
   --mn-gold-dim:      rgba(201,168,118,0.35);
-  --mn-cream:         #f5f0e6; /* primary light text / contrast */
+  --mn-cream:         #f5f0e6; /* primary light text / contrast, dominant logo/text color */
   --mn-cream-muted:   rgba(245,240,230,0.62);
   --mn-cream-faint:   rgba(245,240,230,0.4);
-  --mn-rose:          #8b6b6a; /* restrained muted dusty rose — primary CTA accent only */
+  --mn-rose:          #8b6b6a; /* restrained dusty rose — primary CTA accent only, if useful */
   --mn-rose-dim:      rgba(139,107,106,0.28);
   --mn-border:        rgba(201,168,118,0.22);
 
   /* Typography */
-  --mn-script:         'Alex Brush', cursive; /* brand wordmark — "Mercado Negro" */
+  --mn-script:         'Alex Brush', cursive; /* brand wordmark — "Mercado Negro" (baked into the approved lockup image) */
   --mn-serif:        'EB Garamond', Georgia, 'Times New Roman', serif; /* editorial headings, byline, section titles */
   --mn-serif-italic:  'EB Garamond', Georgia, serif; /* emotional/editorial copy, italic */
   --mn-sans:          Arial, Helvetica, sans-serif; /* functional / UI text */
@@ -34,16 +35,26 @@
 }
 
 /*
-IMPORTANT:
-- Primary brand mark = brand/logo/mercado-negro-primary-lockup-*.webp
-  (round seal + script "Mercado Negro" + gold "BY MARTHA DOMÍNGUEZ"
-  byline). Use the seal alone (brand/logo/mercado-negro-seal-*.webp)
-  for favicons, compact nav branding, and secondary badge use.
-- These are supplied, approved, transparent production assets.
-  Do NOT redraw, trace, simplify, reinterpret or replace them.
-- Do NOT use an all-caps serif wordmark as the primary logo — the
-  script "Mercado Negro" treatment (--mn-script) is the approved
-  primary wordmark. --mn-serif is for secondary/editorial text only.
+IMPORTANT — APPROVED OPTION 1 (locked direction, supersedes earlier passes):
+- Primary brand mark = brand-option1/logo/mercado-negro-option1-full-lockup-transparent.webp
+  (seal + script "Mercado Negro" + fine gold divider + "BY MARTHA
+  DOMÍNGUEZ" byline, one flattened image). Use on dark surfaces.
+  Fallback exact-black-background master:
+  mercado-negro-option1-full-lockup-black.webp
+- Compact/secondary uses (favicon, nav, social badge) =
+  brand-option1/logo/mercado-negro-option1-seal-transparent.webp
+  (or -black.webp on an exact-black surface). Do not squeeze the full
+  tall lockup into small icon slots — use the seal.
+- These are supplied, approved, production assets. Do NOT redraw,
+  simplify, restyle, trace, regenerate, or substitute them.
+- Background must be black/near-black dominant (--mn-black /
+  --mn-charcoal). Do NOT use brown/chocolate-forward panels or
+  backgrounds — that was an earlier, superseded direction.
+- Gold is a restrained accent/detail only — rules, borders, small
+  text — not a dominant fill.
 - Service descriptors ("PASTELERÍA & CATERING") and taglines stay as
   live HTML text beneath the logo lockup, not baked into the logo file.
+- Earlier assets under css/mn-brand-tokens-history (if present) and
+  brand/ (Option "seal + script" pass) are superseded by
+  brand-option1/ — kept only as legacy reference, not for active use.
 */
