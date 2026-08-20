@@ -3,33 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="brand/favicon/mercado-negro-icon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="brand/favicon/mercado-negro-icon-192.png">
+  <link rel="shortcut icon" href="brand/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="brand/favicon/mercado-negro-icon-180.png">
+  <meta name="theme-color" content="#121210">
   <title>Martha Domínguez — Mercado Negro</title>
   <meta name="description" content="Pastelería & Catering">
   <meta property="og:type" content="profile">
   <meta property="og:title" content="Martha Domínguez — Mercado Negro">
   <meta property="og:description" content="Pastelería & Catering">
-  <meta property="og:image" content="https://eurekawebsites.github.io/tarjeta-martha/images/mercado-negro-logo.png">
-  <meta property="og:image:width" content="410">
-  <meta property="og:image:height" content="410">
+  <meta property="og:image" content="https://eurekawebsites.github.io/tarjeta-martha/brand/social/mercado-negro-social-avatar-1024.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
   <meta property="og:url" content="https://eurekawebsites.github.io/tarjeta-martha/tarjeta-martha-mn.html">
   <meta property="og:site_name" content="Mercado Negro">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Martha Domínguez — Mercado Negro">
   <meta name="twitter:description" content="Pastelería & Catering">
-  <meta name="twitter:image" content="https://eurekawebsites.github.io/tarjeta-martha/images/mercado-negro-logo.png">
+  <meta name="twitter:image" content="https://eurekawebsites.github.io/tarjeta-martha/brand/social/mercado-negro-social-avatar-1024.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/mn-brand-tokens.css">
   <style>
     /* ══════════════════════════════════════════════════════════
-       Mercado Negro digital card — unified brand pass.
+       Mercado Negro digital card — approved brand pass.
        Charcoal / chocolate / antique gold / cream, restrained
-       dusty rose. Legacy circular mark kept as a secondary/legacy
-       badge; MERCADO NEGRO serif wordmark is now the primary mark.
-       No brand artwork redrawn — see css/mn-brand-tokens.css for
-       the crest-asset note.
+       dusty rose. Primary mark = supplied round-seal + script
+       "Mercado Negro" + "BY MARTHA DOMÍNGUEZ" lockup — used as
+       delivered, not redrawn. See brand/ and css/mn-brand-tokens.css.
        ══════════════════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: hidden; }
@@ -69,47 +72,15 @@
       border-bottom: 1px solid var(--mn-border);
     }
 
-    /* Legacy circular mark — kept as a secondary badge, reduced weight.
-       No longer the dominant brand element on the card. */
-    .card-mn .legacy-badge {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
+    /* Primary brand mark — supplied lockup: round seal + script
+       "Mercado Negro" + gold "BY MARTHA DOMÍNGUEZ" byline, used as
+       one image exactly as delivered. */
+    .card-mn .lockup {
+      width: 100%;
+      max-width: 260px;
+      height: auto;
       margin: 0 auto 18px;
-      overflow: hidden;
-      border: 1px solid var(--mn-gold-dim);
-      opacity: 0.88;
     }
-    .card-mn .legacy-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    /* Primary wordmark — elegant serif, gold, replaces the old script title */
-    .card-mn .brand-name {
-      font-family: var(--mn-serif);
-      font-weight: 500;
-      font-size: clamp(1.9rem, 8vw, 2.35rem);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--mn-cream);
-      line-height: 1.15;
-      margin-bottom: 10px;
-    }
-
-    .card-mn .rule {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      color: var(--mn-gold);
-      margin-bottom: 10px;
-    }
-    .card-mn .rule::before,
-    .card-mn .rule::after {
-      content: "";
-      width: 30px;
-      height: 1px;
-      background: var(--mn-gold-dim);
-    }
-    .card-mn .rule svg { width: 9px; height: 9px; }
 
     .card-mn .descriptor {
       font-family: var(--mn-sans);
@@ -224,15 +195,12 @@
   <div class="card-mn">
 
     <div class="top">
-      <div class="legacy-badge">
-        <img src="images/mercado-negro-logo.png" alt="Mercado Negro">
-      </div>
-
-      <h1 class="brand-name">Mercado Negro</h1>
-
-      <div class="rule" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.1 2.3 4 6.2 4c2.1 0 3.7 1.1 4.8 2.8C12.1 5.1 13.7 4 15.8 4c3.9 0 5.8 4.1 4.2 7.7C19.5 16.4 12 21 12 21z"/></svg>
-      </div>
+      <img
+        class="lockup"
+        src="brand/logo/mercado-negro-primary-lockup-cream-gold-transparent-1600.webp"
+        alt="Mercado Negro — by Martha Domínguez"
+        width="1600" height="1047"
+      >
 
       <p class="descriptor">Pastelería &amp; Catering</p>
       <p class="tagline">Detalles que se saborean.<br>Momentos que permanecen.</p>

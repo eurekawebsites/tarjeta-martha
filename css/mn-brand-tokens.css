@@ -1,10 +1,10 @@
 :root {
   /* ══════════════════════════════════════════════════════════
      Mercado Negro — canonical UI palette
-     Derived directly from the approved Mercado Negro card shown
-     on the Martha Domínguez hub (hub-assets/cards/mercado-negro.*).
-     Values are sampled from that artwork, not invented — see
-     MN-BRAND-NOTES.md for the derivation.
+     Client-approved brand direction: round seal + script "Mercado
+     Negro" wordmark + "BY MARTHA DOMÍNGUEZ" byline. Values match
+     brand/mn-brand-tokens.json exactly (the supplied source of
+     truth) — see MN-BRAND-NOTES.md for history/derivation.
      ══════════════════════════════════════════════════════════ */
 
   --mn-charcoal:      #121210; /* primary background */
@@ -16,12 +16,13 @@
   --mn-cream:         #f5f0e6; /* primary light text / contrast */
   --mn-cream-muted:   rgba(245,240,230,0.62);
   --mn-cream-faint:   rgba(245,240,230,0.4);
-  --mn-rose:          #8b6b6a; /* restrained muted dusty rose — supporting accent only */
+  --mn-rose:          #8b6b6a; /* restrained muted dusty rose — primary CTA accent only */
   --mn-rose-dim:      rgba(139,107,106,0.28);
   --mn-border:        rgba(201,168,118,0.22);
 
   /* Typography */
-  --mn-serif:        'EB Garamond', Georgia, 'Times New Roman', serif; /* brand / major headings */
+  --mn-script:         'Alex Brush', cursive; /* brand wordmark — "Mercado Negro" */
+  --mn-serif:        'EB Garamond', Georgia, 'Times New Roman', serif; /* editorial headings, byline, section titles */
   --mn-serif-italic:  'EB Garamond', Georgia, serif; /* emotional/editorial copy, italic */
   --mn-sans:          Arial, Helvetica, sans-serif; /* functional / UI text */
 
@@ -34,16 +35,15 @@
 
 /*
 IMPORTANT:
-- The MN ornamental crest seen on the approved hub card is NOT available
-  as a standalone production asset anywhere in this project. Do not crop
-  it out of the composite hub-assets/cards/mercado-negro.* image files
-  for production use — that artwork is licensed/approved only as a
-  finished composite, not as a source for extracting a logo mark.
-- Until a standalone crest file is supplied, brand surfaces use the
-  legacy circular Mercado Negro / Martha Domínguez mark
-  (images/mercado-negro-logo.png) at reduced/secondary visual weight,
-  plus a typographic "MERCADO NEGRO" wordmark in --mn-serif as the
-  primary brand treatment.
-- Do not recolor or redraw either mark to force-match these flat UI
-  tokens.
+- Primary brand mark = brand/logo/mercado-negro-primary-lockup-*.webp
+  (round seal + script "Mercado Negro" + gold "BY MARTHA DOMÍNGUEZ"
+  byline). Use the seal alone (brand/logo/mercado-negro-seal-*.webp)
+  for favicons, compact nav branding, and secondary badge use.
+- These are supplied, approved, transparent production assets.
+  Do NOT redraw, trace, simplify, reinterpret or replace them.
+- Do NOT use an all-caps serif wordmark as the primary logo — the
+  script "Mercado Negro" treatment (--mn-script) is the approved
+  primary wordmark. --mn-serif is for secondary/editorial text only.
+- Service descriptors ("PASTELERÍA & CATERING") and taglines stay as
+  live HTML text beneath the logo lockup, not baked into the logo file.
 */

@@ -9,108 +9,109 @@ Both now share `css/mn-brand-tokens.css`, kept byte-identical in each
 repo since GitHub Pages serves them as two separate static sites with
 no cross-repo includes possible.
 
-## What changed
+## Brand direction history (important for future work)
 
-- Replaced the bright magenta (`#8B2252`) that previously dominated
+There were **two** brand-direction passes on this project. The second
+supersedes the first:
+
+1. **First pass** — an ornamental gold "MN" crest concept (fine ring,
+   dotted texture, botanical flourish) inspired by artwork glimpsed on
+   a Martha Domínguez hub card mockup. No standalone file for that
+   crest ever existed; it was only visible baked into a composite card
+   image. That direction used an all-caps serif "MERCADO NEGRO"
+   wordmark as the primary mark.
+2. **Approved/current pass** — the client confirmed they prefer the
+   **classic round Mercado Negro seal + script "Mercado Negro"
+   wordmark + "BY MARTHA DOMÍNGUEZ" byline** — i.e. a cleaned-up,
+   properly-exported version of the pre-existing legacy circular logo,
+   not the ornate MN crest. This is what's implemented now. **Do not
+   reintroduce the all-caps serif wordmark or the MN-crest concept as
+   the primary mark** — that direction was explicitly rejected.
+
+If a fresh brand pass is ever requested again, check with the client
+which of these directions (or a new one) is current before assuming.
+
+## What changed (both passes combined)
+
+- Removed the bright magenta (`#8B2252`) that originally dominated
   nav, hero CTA, section labels, buttons and form UI on both
-  properties with a restrained palette derived from the approved
-  Mercado Negro card on the Martha Domínguez hub (see "Palette
-  derivation" below). Magenta is gone entirely; dusty rose now
-  appears only on the two or three primary call-to-action buttons.
-- Replaced the large handwritten `Alex Brush` script "Mercado Negro"
-  title (previously the dominant brand mark on both properties) with
-  an elegant uppercase serif `MERCADO NEGRO` wordmark in EB Garamond,
-  matching the treatment on the approved hub card.
-- Demoted the legacy circular mark (`img/logo.png` /
-  `images/mercado-negro-logo.png` — dark circle, "MERCADO · NEGRO"
-  ring text, script "Martha Domínguez" center) from the dominant
-  hero/card visual to a small secondary badge (64–76px). The file was
-  not deleted; it's kept as the legacy mark per the brief.
+  properties. Palette is now charcoal/chocolate/gold/cream with
+  restrained dusty rose on primary CTAs only.
+- Primary brand mark on both properties is now the supplied lockup
+  image (`brand/logo/mercado-negro-primary-lockup-cream-gold-transparent-1600.webp`):
+  round seal + script "Mercado Negro" + gold "BY MARTHA DOMÍNGUEZ"
+  byline, used as one image exactly as delivered — not redrawn,
+  not reconstructed from separate elements.
+- Compact/secondary uses (nav bar, favicon) use the seal alone
+  (`brand/logo/mercado-negro-seal-*-transparent-1024.webp`).
 - Introduced a shared functional/UI type layer (Arial/Helvetica) for
   nav, buttons, form fields and contact rows, separate from the serif
-  brand layer and the italic serif used for the tagline.
+  editorial layer and the script brand wordmark.
 - Rebuilt the website hero as a composed, framed section (gold corner
-  framing, ornamental rule, legacy badge, serif wordmark, descriptor,
-  italic tagline, CTA) instead of plain centered text on flat black.
+  framing, primary lockup, descriptor, italic tagline, CTA) instead of
+  plain centered text on flat black.
 - Unified button hierarchy: primary actions use dusty rose + cream
   text; secondary actions use charcoal surfaces with a thin gold
   border, consistent radius and hover states, on both properties.
+- Added a visually-hidden `<h1>` on the website hero (the visible
+  brand name is now an image) to keep a real heading in the
+  accessibility tree/SEO outline.
 - Preserved all existing functional content and behavior — see
   "Functionality preserved" below.
 
-## Palette derivation
+## Brand assets (current, approved)
 
-Values were sampled directly from `hub-assets/cards/mercado-negro.png`
-in the `tarjeta-martha` repo (the approved hub artwork), not invented:
+All under `brand/` in both repos (copied from the client-supplied
+`Mercado_Negro_Approved_Brand_Assets_for_Claude` pack):
 
-| Token | Hex | Sampled from |
-|---|---|---|
-| `--mn-charcoal` | `#121210` | Clean dark background area, sampled directly |
-| `--mn-chocolate` | `#1c1712` | Cake-stand / plate shadow tones |
-| `--mn-gold` | `#c9a876` | Averaged across crest ring + descriptor band + arrow-button ring pixels (raw average ≈ `#a18a68` in shadow, highlight peaks ≈ `#c7b28d`; picked a usable UI mid-tone in that range) |
-| `--mn-cream` | `#f5f0e6` | "MERCADO NEGRO" headline text, near-white, warmed slightly to match the cream already used on the Martha hub (`#F4EEE3`/`#F5F0E8`) for cross-property consistency |
-| `--mn-rose` | `#8b6b6a` | Flower/floral shadow tones in the card photography — these read as deep muted plum/wine, not a bright rose, which is consistent with "restrained... only when useful"; brightened from the raw photographic shadow sample to be usable as a UI accent |
+- `brand/logo/mercado-negro-primary-lockup-cream-gold-transparent-1600.*`
+  — primary lockup, dark backgrounds. **Preferred primary mark.**
+- `brand/logo/mercado-negro-lockup-gold-transparent-1600.*` — all-gold variant
+- `brand/logo/mercado-negro-lockup-charcoal-gold-transparent-1600.*` — light-background variant
+- `brand/logo/mercado-negro-seal-{cream,gold,charcoal}-transparent-1024.*`
+  — seal alone, for favicons/compact/secondary use
+- `brand/favicon/` — 32/64/180/192/512px + `favicon.ico`
+- `brand/social/mercado-negro-social-avatar-1024.*` — OG/Twitter/social image
+- `brand/mn-brand-tokens.json`, `brand/mn-brand-tokens-approved.css` —
+  client-supplied color source of truth (values match
+  `css/mn-brand-tokens.css` exactly)
+- `brand/reference/` — approved direction board + original logo/seal
+  references, kept for history
 
-See `css/mn-brand-tokens.css` for the full token list.
+None of these were redrawn, traced, or reinterpreted — used exactly
+as supplied.
 
-## ⚠️ Missing production assets — action needed
+## Palette
 
-Two assets referenced or implied by the brand direction do not exist
-anywhere in either project and were **not** created as substitutes,
-per instruction:
+| Token | Hex |
+|---|---|
+| `--mn-charcoal` | `#121210` |
+| `--mn-chocolate` | `#1C1712` |
+| `--mn-gold` | `#C9A876` |
+| `--mn-cream` | `#F5F0E6` |
+| `--mn-rose` (dusty rose) | `#8B6B6A` — primary CTA accent only, used sparingly |
 
-### 1. Standalone MN crest
+These match `brand/mn-brand-tokens.json` exactly (the supplied source
+of truth).
 
-The ornamental gold "MN" circular crest (fine ring, dotted texture,
-botanical flourish) visible on the approved Mercado Negro hub card
-**only exists baked into that composite card image**
-(`tarjeta-martha/hub-assets/cards/mercado-negro.png` /
-`.webp`). There is no standalone crest file — vector or raster,
-transparent or otherwise — anywhere in `tarjeta-martha`,
-`mercado-negro`, or `mercado-negro-app`.
+## Remaining gap
 
-I did not crop it out of the composite card for production use (it
-would carry JPEG/WebP compression artifacts, an arbitrary crop
-boundary, and no transparency — not something to ship as a logo
-file), and did not redraw/trace/reinterpret it as a new SVG.
-
-**What's needed:** a standalone crest file — ideally a vector (SVG)
-or a high-resolution PNG with transparency — matching the mark shown
-on the hub card, sized with safe padding around the ring and
-botanical branch so it can be dropped into both the card header and
-the website hero without repeating this audit.
-
-Until it's supplied, both properties use the legacy circular mark as
-a small secondary badge plus the typographic `MERCADO NEGRO` serif
-wordmark as the primary brand treatment, per the brief's fallback
-guidance.
-
-### 2. Dark dessert photography
-
-The brief's photography direction (dark, editorial, chocolate,
-berries, controlled highlights) references the hub card's dessert
-photography as the reference *style*, but no dedicated photography
-asset — of that dish or any other — exists in either project to
-place in the website hero or elsewhere. `mercado-negro-app/src/assets/hero.png`
-is unrelated generic app illustration art from a different product
-and was not used.
-
-Rather than substitute generic stock food photography (explicitly
-discouraged in the brief) or fabricate an image, the website hero was
-composed with layered charcoal/chocolate tone, gold framing and
-typography to avoid the "empty black hero" problem without
-photography. **If real product photography becomes available, it
-should replace the current tone-only hero background** — the CSS is
-structured (`.hero` background layer) to make that a contained swap.
+No dedicated dark dessert photography asset exists in either project
+(the earlier note about this still applies). The website hero is
+composed with layered charcoal/chocolate tone, gold framing and the
+logo lockup to avoid an empty hero without substituting stock
+photography. **If real product photography becomes available,** it
+can be added as a hero background layer — the CSS `.hero` background
+is structured to make that a contained change.
 
 ## Functionality preserved
 
 Verified unchanged on both properties:
 
 - WhatsApp deep links (card: `+52 55 1728 4050`; website: `+52 56 5791 7967`
-  — these were already two different numbers in the original files;
-  not something introduced or "fixed" here, flagging in case it's an
-  existing data error worth checking)
+  — these are two different numbers in the original source files, not
+  something introduced or changed here; flagging in case it's worth
+  checking which is correct)
 - Instagram handle: `@mercadonegrobymarthadominguez`
 - CLABE interbancaria (card only): `012180015019864949`, with its
   copy-to-clipboard behavior
@@ -119,8 +120,7 @@ Verified unchanged on both properties:
   messaging, same field set and options
 - All internal nav anchors (`#nosotros`, `#servicios`, `#menu`, `#contacto`)
 - Menu content: Pasteles / Postres / Antipastos / Charcutería, same
-  descriptions (icons changed from emoji to line-art SVG for visual
-  consistency with the new serif/gold system; no content change)
+  descriptions
 
 No Firebase files, hosting config, or new dependencies were
 introduced. Both properties remain plain static HTML/CSS/JS on
