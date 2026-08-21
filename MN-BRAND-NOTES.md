@@ -114,17 +114,34 @@ channel row-by-row). This isn't something introduced here; it's how
 the file was delivered.
 
 Rather than stretch, redraw, or otherwise modify that asset, both the
-card and the website display it inside a `overflow:hidden` frame at a
-fixed `aspect-ratio: 728/105` (`object-fit: cover; object-position:
-top`) — this shows only the clean "Mercado Negro" text and cuts off
-above where the truncation starts. The divider and "BY MARTHA
-DOMÍNGUEZ" byline are then recreated as real HTML/CSS (a thin
+card and the website display it inside an `overflow:hidden` frame
+sized to `aspect-ratio: 728/136` — that boundary was found by scanning
+the alpha channel row-by-row: the "Mercado Negro" text and its full
+divider render completely intact through y≈136, and only the already-
+truncated byline pixels below that row are cut. The `<img>` itself
+uses plain `width:100%; height:auto` with no `object-fit`/
+`object-position` — since the frame's aspect ratio matches the image's
+true rendered proportions at that crop line, the browser reveals
+exactly the intended region with no distortion. The divider and "BY
+MARTHA DOMÍNGUEZ" byline are then recreated as real HTML/CSS (a thin
 champagne rule + dot, and a text line), matching
 `LOCKED_OPTION4_FULL_STACK_CARD_REFERENCE.png`. The source PNG/WebP
 files on disk are byte-for-byte what was delivered — only how much of
-them is *displayed* is constrained via CSS. If a corrected export
-(with the byline fully visible) is supplied later, this workaround can
-be removed and the image shown at full height instead.
+them is *displayed* is constrained via CSS.
+
+**Correction (2026-08-21):** an earlier version of this fix used
+`aspect-ratio: 728/105` with `object-fit: cover; object-position: top`
+— that boundary was a guess, not measured from the actual pixels, and
+it cut into the middle of the "Mercado Negro" glyphs and the divider
+line, which read as clipped letters plus a visible dark rectangular
+matte (the crop frame's own bounding box against the panel/hero
+background). The `728/136` boundary above is the corrected, verified
+value — confirmed by compositing the crop against the actual panel
+background color and checking no glyph or divider pixel is cut.
+
+If a corrected wordmark export (with the byline fully visible, no
+truncation) is supplied later, this workaround can be removed
+entirely and the image shown at full natural height instead.
 
 `css/mn-brand-tokens.css` keeps backward-compatible aliases
 (`--mn-cream` → `--mn-ivory`, `--mn-gold` → `--mn-champagne`,

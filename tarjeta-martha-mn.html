@@ -82,22 +82,26 @@
     .card-mn .monogram {
       width: 92px;
       height: auto;
-      margin: 0 auto 22px;
+      margin: 0 auto 4px;
       display: block;
     }
 
-    /* The supplied wordmark file has its "BY MARTHA DOMÍNGUEZ" byline
-       cut off mid-word at the bottom edge of the PNG itself. Rather
-       than stretching/redrawing that asset, this wrapper shows only
-       the clean "Mercado Negro" text + its divider (the file's own
-       top ~119px of 155px) via a fixed aspect-ratio + object-fit
-       crop, and the byline is recreated as real HTML text below —
-       matching the approved reference layout. The source file is
-       used unmodified; only how much of it is displayed is constrained. */
+    /* The supplied wordmark file (728x155) has its own "Mercado Negro"
+       text + divider fully intact through y=136, followed by a
+       "BY MARTHA DOMÍNGUEZ" byline that is truncated mid-letter at
+       the file's own bottom edge (confirmed by inspecting the alpha
+       channel row-by-row — not something introduced here). This
+       wrapper crops to exactly that measured boundary — 728:136,
+       i.e. only the last ~19px of a 155px-tall file, well below any
+       visible glyph — so the full "Mercado Negro" wordmark and its
+       complete divider render uncropped, and only the already-
+       truncated byline pixels are cut. The byline is recreated as
+       real HTML text below. The source file itself is never modified,
+       stretched, or redrawn. */
     .card-mn .wordmark-frame {
       width: 100%;
       max-width: 240px;
-      aspect-ratio: 728 / 105;
+      aspect-ratio: 728 / 136;
       overflow: hidden;
       margin: 0 auto 10px;
     }
@@ -105,8 +109,6 @@
       width: 100%;
       height: auto;
       display: block;
-      object-fit: cover;
-      object-position: top;
     }
     .card-mn .wordmark-rule {
       display: flex;
