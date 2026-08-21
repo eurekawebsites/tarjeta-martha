@@ -1,44 +1,44 @@
 :root {
   /* ══════════════════════════════════════════════════════════
      Mercado Negro — canonical UI palette
-     APPROVED: Option 1 logo structure + Option C UI palette
-     (Black + Champagne) — locked. Black/near-black dominant,
-     ivory is the primary text/logo color, champagne is a
-     restrained accent only. No brown/chocolate-forward surfaces,
-     no dusty-rose primary CTA. Values match
-     brand-optionc/tokens/mn-brand-tokens.json exactly (the
-     supplied source of truth) — see MN-BRAND-NOTES.md for full
+     FINAL LOCKED BRAND (current): Option 2 monogram + Option 4
+     wordmark + Option C palette (Black + Champagne). Black/near-black
+     dominant, ivory primary text, champagne restrained accent.
+     No brown/chocolate-forward surfaces, no dusty-rose primary CTA.
+     Values match brand-final/tokens/mn-brand-tokens.json exactly
+     (the supplied source of truth) — see MN-BRAND-NOTES.md for full
      direction history.
      ══════════════════════════════════════════════════════════ */
 
-  --mn-black:         #090908; /* deepest background tier */
-  --mn-charcoal:      #121210; /* primary background */
-  --mn-panel:         #0D0D0D; /* card/panel surface */
-  --mn-panel-2:       #111111; /* slightly elevated panel surface */
-  --mn-ivory:         #F5F0E6; /* primary text/logo color */
-  --mn-champagne:     #D8C79E; /* restrained accent — borders, rules, labels */
-  --mn-champagne-soft: #C9B88B; /* secondary/muted champagne */
-  --mn-divider:       rgba(216,199,158,0.52);
+  --mn-black:         #0B0B0B; /* deepest background tier */
+  --mn-near-black:    #121212; /* primary background / panel */
+  --mn-ivory:         #F4F1EA; /* primary text/logo color */
+  --mn-champagne:     #D4B98A; /* restrained accent — borders, rules, labels */
+  --mn-champagne-soft: #c7a878; /* secondary/muted champagne, derived for hover states */
+  --mn-divider:       rgba(212,185,138,0.5);
 
   --mn-button-fill:       #101010;
-  --mn-button-fill-hover: #151515;
-  --mn-button-border:     #D8C79E;
-  --mn-button-text:       #F5F0E6;
+  --mn-button-fill-hover: #161616;
+  --mn-button-border:     #D4B98A;
+  --mn-button-text:       #F4F1EA;
 
   /* Back-compat aliases — older markup in this project may still
-     reference these names; keep them mapped onto the Option C values
-     so nothing silently reverts to the superseded brown/rose palette. */
+     reference earlier-pass variable names; keep them mapped onto the
+     current locked values so nothing silently reverts to a
+     superseded palette. */
+  --mn-charcoal:      var(--mn-near-black);
+  --mn-panel:         var(--mn-near-black);
+  --mn-panel-2:       #161616;
   --mn-cream:         var(--mn-ivory);
-  --mn-cream-muted:   rgba(245,240,230,0.62);
-  --mn-cream-faint:   rgba(245,240,230,0.4);
+  --mn-cream-muted:   rgba(244,241,234,0.62);
+  --mn-cream-faint:   rgba(244,241,234,0.4);
   --mn-gold:          var(--mn-champagne);
-  --mn-gold-bright:   #e8dcb8;
-  --mn-gold-dim:      rgba(216,199,158,0.35);
-  --mn-border:        rgba(216,199,158,0.28);
+  --mn-gold-bright:   #e3cda3;
+  --mn-gold-dim:      rgba(212,185,138,0.35);
+  --mn-border:        rgba(212,185,138,0.28);
   --mn-charcoal-2:    var(--mn-panel-2);
 
   /* Typography */
-  --mn-script:         'Alex Brush', cursive; /* brand wordmark — "Mercado Negro" (baked into the approved lockup image) */
   --mn-serif:        'EB Garamond', Georgia, 'Times New Roman', serif; /* editorial headings, byline, section titles */
   --mn-serif-italic:  'EB Garamond', Georgia, serif; /* emotional/editorial copy, italic */
   --mn-sans:          Arial, Helvetica, sans-serif; /* functional / UI text */
@@ -51,25 +51,28 @@
 }
 
 /*
-IMPORTANT — APPROVED: Option 1 logo + Option C UI palette (locked,
-supersedes all earlier passes):
-- Logo structure is UNCHANGED from Option 1 — same seal + script
-  "Mercado Negro" + gold divider + "BY MARTHA DOMÍNGUEZ" byline,
-  one flattened lockup image. Primary mark =
-  brand-optionc/logo/mercado-negro-option1-full-lockup-transparent.webp
-  Compact/secondary uses (favicon, nav, social) = the seal alone,
-  brand-optionc/logo/mercado-negro-option1-seal-transparent.webp
-- UI palette is Option C: black/near-black dominant, ivory primary
-  text, champagne restrained accent only. NO brown/chocolate-forward
-  surfaces anywhere (that was the second pass, fully superseded).
-  NO dusty-rose primary CTA (that was the third-pass/Option-1-UI
-  pass, also superseded for buttons specifically).
-- Primary CTA = --mn-button-fill (near-black) fill,
+IMPORTANT — FINAL LOCKED BRAND (current, supersedes all earlier passes):
+- Monogram = brand-final/logo/mercado-negro-monogram-option2-locked-transparent.webp
+  (ornate circular gold-frame "MN" monogram, richer 3D gold finish).
+  Primary mark for compact/favicon/social/badge use.
+- Wordmark = brand-final/logo/mercado-negro-wordmark-option4-transparent.webp
+  ("Mercado Negro" in a clean upright Didot-style serif — NOT the
+  script/cursive treatment used in every earlier pass). Used as its
+  own separate image alongside the monogram, not fused into one
+  lockup file.
+- Leave breathing room between the monogram and the wordmark when
+  stacking them — do not place them tight against each other.
+- These are supplied, approved, production assets. Do NOT redraw,
+  trace, simplify, reinterpret, or replace them. Do NOT substitute a
+  script font for the wordmark — Option 4 (upright serif) is locked.
+- Primary CTA = outline treatment: --mn-button-fill (near-black) fill,
   --mn-button-border (champagne) border, --mn-button-text (ivory)
-  text — an outline-style button, not a filled color block.
-- These are supplied, approved, production assets/tokens. Do NOT
-  redraw the logo, and do NOT reintroduce brown/chocolate panels or
-  rose-filled buttons.
+  text. No filled color block.
 - Service descriptors ("PASTELERÍA & CATERING") and taglines stay as
-  live HTML text beneath the logo lockup, not baked into the logo file.
+  live HTML text, not baked into any logo file.
+- The Martha Domínguez hub's Mercado Negro tile
+  (tarjeta-martha/index.html, hub-assets/cards/mercado-negro.webp)
+  is a single flat composite photo with the OLD branding baked into
+  its pixels — it was intentionally left unchanged in this pass per
+  the user's direction. See MN-BRAND-NOTES.md "Hub tile — pending."
 */
