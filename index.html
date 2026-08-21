@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/md-icons/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="images/md-icons/favicon-48.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="images/md-icons/favicon-192.png">
-  <link rel="shortcut icon" href="images/md-icons/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/md-icons/apple-touch-icon-180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/md-icons-v2/martha-md-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="images/md-icons-v2/martha-md-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/md-icons-v2/martha-md-192.png">
+  <link rel="shortcut icon" href="images/md-icons-v2/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/md-icons-v2/martha-md-180.png">
   <meta name="theme-color" content="#F4EEE3">
   <title>Martha Domínguez — Tarjeta Digital</title>
   <meta name="description" content="Tarjeta digital · Coordenada Viajes y Mercado Negro">
@@ -184,14 +184,13 @@
       object-position: center 76%;
     }
 
-    /* Mercado Negro source image contains ~34px of cream canvas above
-       the actual card. Crop that canvas out while filling the same
-       879:380 tile, without modifying the source asset. */
+    /* Mercado Negro's final approved tile is delivered natively at
+       879:380 — the same ratio as the shared tile aspect-ratio — so
+       it renders normally with no crop compensation needed. */
     .choice--mn img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center bottom;
     }
 
     /* Re-establish a clean common edge after the controlled crops. */
@@ -272,7 +271,7 @@
         <img
           src="hub-assets/cards/mercado-negro.webp"
           alt="Mercado Negro — Pastelería y catering"
-          width="879" height="402"
+          width="879" height="380"
         >
       </a>
 

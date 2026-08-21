@@ -4,37 +4,51 @@ Working notes from the brand consolidation pass across:
 
 - `tarjeta-martha-mn.html` (digital card, in the `tarjeta-martha` repo)
 - `mercado-negro/index.html` (website, this repo)
-- The Martha Domínguez hub's Mercado Negro tile — **NOT yet updated,
-  see "Hub tile — pending" below.**
+- `tarjeta-martha/index.html` — the Martha Domínguez hub's Mercado
+  Negro tile (now up to date — see "Hub tile — resolved" below)
 
 Both HTML files share `css/mn-brand-tokens.css`, kept byte-identical
 in each repo since GitHub Pages serves them as two separate static
 sites with no cross-repo includes possible.
 
-## ⚠️ Hub tile — pending (not done in this pass)
+## ✅ Hub tile — resolved
 
-The Martha hub (`tarjeta-martha/index.html`) shows Mercado Negro as
-one flat photo composite: `hub-assets/cards/mercado-negro.webp` /
-`.png`. The old monogram, old wordmark, flowers, cake, plate, arrow
-button and gold border are all baked into the same image pixels —
-there is no way to swap "just the branding" without either
-regenerating that composite (explicitly against instructions — no
-redrawing) or overlaying new elements on top of the existing photo.
+Earlier notes here flagged that the Martha hub's Mercado Negro tile
+(`tarjeta-martha/hub-assets/cards/mercado-negro.webp`/`.png`) was a
+flat photo composite with the *old* monogram/wordmark baked into its
+pixels, and that there was no way to update "just the branding"
+without either regenerating the composite or overlaying new elements —
+so it was intentionally left alone in the Final Locked Brand Pack
+pass.
 
-When the Final Locked Brand Pack asked to update "the Mercado Negro
-tile only" on the hub, this was surfaced to the user as a real
-constraint rather than guessed at, and **the user's direction was to
-leave the hub tile alone for this pass.** The website and digital card
-were updated to the final locked brand; the hub tile still shows the
-old monogram/wordmark baked into its photo.
+That gap is now closed: the client supplied a freshly regenerated hub
+tile (`Martha_FINAL_Hub_Card_and_Transparent_Favicon_for_Claude` pack)
+with the current locked monogram + Option 4 serif wordmark baked in by
+whoever produced the source art — option (a) from the note below,
+resolved as expected. Same photo composition, cake, tart, plate, arrow
+button, and gold border as before; only the branding inside the tile
+changed. Delivered pre-sized at 879×380 (the tile's existing shared
+aspect ratio), so the old CSS crop-compensation hack
+(`object-position: center bottom` working around ~22px of extra cream
+canvas in the old export) was removed — the image now renders at its
+native ratio with no special-casing.
 
-**Next time this comes up:** either (a) get a freshly regenerated hub
-tile composite image with the new monogram/wordmark already baked in
-by whoever produces the source art, or (b) explicitly authorize an
-HTML/CSS overlay approach (new monogram + wordmark images
-absolutely-positioned on top of the existing photo, covering the old
-branding, exact composition/size/corners/border/arrow otherwise
-untouched).
+At the same time, a new **transparent-background** Martha MD monogram
+favicon was supplied (`martha-favicon/`), replacing the earlier
+favicon derivation that had padded the monogram onto its own opaque
+cream background — that version was showing a visible box behind the
+mark in some browser chrome. Now under
+`tarjeta-martha/images/md-icons-v2/`, referenced from `index.html`'s
+`<head>` only. The Coordenada card and Mercado Negro card keep their
+own separate, already-correct favicons — verified neither was
+incorrectly inheriting the hub's.
+
+The old `images/md-icons/` folder (opaque-background version) and old
+hub tile bytes are gone from active use but not force-deleted from
+git history — only the in-place files were overwritten per the
+brief's "replace" instruction, which is different from the
+brand-token folders in earlier passes that were deliberately kept
+side-by-side as legacy references.
 
 ## Brand direction history (important for future work)
 
