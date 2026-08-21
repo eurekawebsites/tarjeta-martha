@@ -86,29 +86,19 @@
       display: block;
     }
 
-    /* The supplied wordmark file (728x155) has its own "Mercado Negro"
-       text + divider fully intact through y=136, followed by a
-       "BY MARTHA DOMÍNGUEZ" byline that is truncated mid-letter at
-       the file's own bottom edge (confirmed by inspecting the alpha
-       channel row-by-row — not something introduced here). This
-       wrapper crops to exactly that measured boundary — 728:136,
-       i.e. only the last ~19px of a 155px-tall file, well below any
-       visible glyph — so the full "Mercado Negro" wordmark and its
-       complete divider render uncropped, and only the already-
-       truncated byline pixels are cut. The byline is recreated as
-       real HTML text below. The source file itself is never modified,
-       stretched, or redrawn. */
-    .card-mn .wordmark-frame {
+    /* CLEAN wordmark asset (mercado-negro-wordmark-option4-CLEAN-
+       transparent.png) contains only the "Mercado Negro" mark itself —
+       no baked byline, no crop compensation needed. Rendered at its
+       natural proportions with plain responsive sizing; the divider
+       and byline below are real HTML/CSS, not part of the image.
+       Source file used exactly as delivered — not cropped, masked,
+       re-exported, or redrawn. */
+    .card-mn .wordmark {
+      display: block;
       width: 100%;
       max-width: 240px;
-      aspect-ratio: 728 / 136;
-      overflow: hidden;
-      margin: 0 auto 10px;
-    }
-    .card-mn .wordmark {
-      width: 100%;
       height: auto;
-      display: block;
+      margin: 0 auto 10px;
     }
     .card-mn .wordmark-rule {
       display: flex;
@@ -260,14 +250,12 @@
         alt=""
         width="1008" height="1051"
       >
-      <div class="wordmark-frame">
-        <img
-          class="wordmark"
-          src="brand-final/logo/mercado-negro-wordmark-option4-transparent.webp"
-          alt="Mercado Negro"
-          width="728" height="155"
-        >
-      </div>
+      <img
+        class="wordmark"
+        src="brand-final/logo/mercado-negro-wordmark-option4-CLEAN-transparent.png"
+        alt="Mercado Negro"
+        width="1673" height="324"
+      >
       <div class="wordmark-rule" aria-hidden="true"><span></span></div>
       <p class="byline">By Martha Domínguez</p>
 
@@ -331,7 +319,7 @@
 
   <footer style="text-align:center;padding:20px 0 12px">
     <a href="https://www.eurekawebsites.tech/" target="_blank" rel="noopener noreferrer"
-       style="font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,230,0.3);text-decoration:none;transition:color 0.2s;"
+       style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,230,0.3);text-decoration:none;transition:color 0.2s;"
        onmouseover="this.style.color='rgba(245,240,230,0.6)'"
        onmouseout="this.style.color='rgba(245,240,230,0.3)'">
       POWERED BY EUREKA TECH

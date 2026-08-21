@@ -143,6 +143,22 @@ If a corrected wordmark export (with the byline fully visible, no
 truncation) is supplied later, this workaround can be removed
 entirely and the image shown at full natural height instead.
 
+**Resolved (2026-08-21):** the client supplied a corrected export,
+`mercado-negro-wordmark-option4-CLEAN-transparent.png` (1673×324),
+containing only the "Mercado Negro" mark itself — no baked byline, no
+truncation, generous transparent padding on all sides (verified via
+alpha-channel bbox: content sits at (92,55)–(1587,269) inside the
+1673×324 canvas, corners fully transparent). This supersedes
+`mercado-negro-wordmark-option4-transparent.*` and the crop-frame
+workaround above entirely. Both the card and the website now render
+this file directly with plain `display:block; width:100%; height:auto`
+— no `aspect-ratio`, no `overflow:hidden` frame, no `object-fit`/
+`object-position`. The divider and "BY MARTHA DOMÍNGUEZ" byline remain
+real HTML/CSS underneath, unchanged. The old
+`mercado-negro-wordmark-option4-transparent.png/.webp` files are left
+on disk (not deleted) but are no longer referenced by either live HTML
+file — see "Brand assets" below.
+
 `css/mn-brand-tokens.css` keeps backward-compatible aliases
 (`--mn-cream` → `--mn-ivory`, `--mn-gold` → `--mn-champagne`,
 `--mn-charcoal` → `--mn-near-black`, `--mn-panel` → `--mn-near-black`,
@@ -197,10 +213,12 @@ All under `brand-final/` in both repos (copied from the client-supplied
   — ornate gold-frame "MN" monogram. **Primary compact mark** — use
   for favicon, nav, social badge, and stacked above the wordmark on
   the card/hero.
-- `brand-final/logo/mercado-negro-wordmark-option4-transparent.*` —
-  upright Didot-serif "Mercado Negro" wordmark. Byline text baked into
-  this file is cut off at the bottom edge — see "Known issue" above;
-  displayed through a cropping frame, byline recreated as HTML.
+- `brand-final/logo/mercado-negro-wordmark-option4-CLEAN-transparent.png`
+  — upright Didot-serif "Mercado Negro" wordmark, **current/active**.
+  Clean export containing only the wordmark, no baked byline, no crop
+  needed — rendered directly at natural proportions. Supersedes
+  `mercado-negro-wordmark-option4-transparent.*` (kept on disk, no
+  longer referenced) — see "Known issue" / "Resolved" above.
 - `brand-final/favicon/` — 32/48/64/128/180/192/512px + `favicon.ico`
   (monogram-based)
 - `brand-final/social/mercado-negro-social-avatar-1024.*` — square
