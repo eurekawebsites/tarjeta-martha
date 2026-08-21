@@ -219,8 +219,15 @@ All under `brand-final/` in both repos (copied from the client-supplied
   needed — rendered directly at natural proportions. Supersedes
   `mercado-negro-wordmark-option4-transparent.*` (kept on disk, no
   longer referenced) — see "Known issue" / "Resolved" above.
-- `brand-final/favicon/` — 32/48/64/128/180/192/512px + `favicon.ico`
-  (monogram-based)
+- `brand-final/favicon-transparent/` — 32/48/64/180/192/512px +
+  `favicon.ico`, **current/active**. Genuinely transparent PNGs
+  (verified corner-pixel alpha = 0) from the client-supplied
+  `Mercado_Negro_Transparent_Favicon_Set`. Supersedes
+  `brand-final/favicon/`, whose PNGs had an opaque black
+  (`#0B0B0B`-ish) background baked in — confirmed via corner-pixel
+  check (`(11,11,11,255)`). The old `brand-final/favicon/` folder is
+  kept on disk (not deleted) but is no longer referenced by either
+  live HTML file.
 - `brand-final/social/mercado-negro-social-avatar-1024.*` — square
   social avatar
 - `brand-final/social/mercado-negro-social-share-1200x630.*` —
