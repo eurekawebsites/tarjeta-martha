@@ -45,36 +45,49 @@
     }
 
     /* ===== Card shell ===== */
+    /* Background tones sampled directly from the approved mockup's paper
+       (measured pixel colors, not an invented texture): open paper reads
+       ~#F6EEE0–#F7EAD8, corners/edges darken toward ~#E0CCAE–#D2B58D. */
 
     .card-cv {
       position: relative;
       background:
-        radial-gradient(ellipse at 12% 8%, rgba(201,168,76,0.10), transparent 40%),
-        radial-gradient(ellipse at 88% 92%, rgba(45,80,22,0.07), transparent 45%),
-        #F5EFDF;
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(247,234,216,0.9) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 8% 4%, rgba(228,206,172,0.85) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 94% 6%, rgba(224,204,174,0.8) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 6% 96%, rgba(210,181,141,0.75) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 96% 94%, rgba(212,180,132,0.7) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 70% at 50% 45%, #F6EEE0 0%, #EDDFC4 100%);
       color: var(--cv-text);
       width: min(calc(100vw - 24px), 430px);
       border-radius: 18px;
-      border: 1px solid rgba(201,168,76,0.55);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 14px 40px rgba(42,35,24,0.16);
+      border: 1px solid rgba(178,140,74,0.6);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 20px 48px rgba(42,35,24,0.22);
       overflow: hidden;
     }
 
-    /* subtle vintage map/paper texture, drawn purely in CSS (no external texture asset supplied) */
+    /* fine crack/fiber linework, matched to the mockup's visible paper grain */
     .card-cv::before {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
-      opacity: 0.6;
+      opacity: 0.55;
       background-image:
-        radial-gradient(circle at 20% 15%, rgba(170,138,74,0.14) 0, transparent 22%),
-        radial-gradient(circle at 80% 10%, rgba(170,138,74,0.11) 0, transparent 18%),
-        radial-gradient(circle at 15% 60%, rgba(170,138,74,0.12) 0, transparent 20%),
-        radial-gradient(circle at 85% 55%, rgba(170,138,74,0.1) 0, transparent 24%),
-        radial-gradient(circle at 50% 85%, rgba(170,138,74,0.12) 0, transparent 26%),
-        repeating-linear-gradient(115deg, rgba(120,100,60,0.05) 0px, rgba(120,100,60,0.05) 1px, transparent 1px, transparent 90px),
-        repeating-linear-gradient(25deg, rgba(120,100,60,0.04) 0px, rgba(120,100,60,0.04) 1px, transparent 1px, transparent 110px);
+        repeating-linear-gradient(113deg, rgba(150,118,64,0.07) 0px, rgba(150,118,64,0.07) 1px, transparent 1px, transparent 54px),
+        repeating-linear-gradient(24deg, rgba(150,118,64,0.06) 0px, rgba(150,118,64,0.06) 1px, transparent 1px, transparent 68px),
+        repeating-linear-gradient(-62deg, rgba(150,118,64,0.045) 0px, rgba(150,118,64,0.045) 1px, transparent 1px, transparent 82px);
+      z-index: 0;
+    }
+
+    /* soft vignette pulling the corners darker, as measured in the approved reference */
+    .card-cv::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 1;
+      box-shadow: inset 0 0 70px rgba(122,94,48,0.16), inset 0 0 140px rgba(122,94,48,0.08);
       z-index: 0;
     }
 
@@ -86,7 +99,7 @@
     /* ticket notches at the mid divider */
     .card-cv .notch {
       position: absolute;
-      top: 232px;
+      top: 241px;
       width: 22px;
       height: 22px;
       background: #E8DFC8;
@@ -96,31 +109,34 @@
     .card-cv .notch--l { left: -11px; }
     .card-cv .notch--r { right: -11px; }
 
-    /* ===== Top branding ===== */
+    /* ===== Top branding =====
+       Proportions measured from the approved mockup at 947px card width:
+       London stamp d=170px (17.9%), Paris tag w=175px (18.5%), compass
+       d=110px (11.6%), COORDENADA cap-height 50px (5.3%). Scaled to 430px. */
 
     .top {
       position: relative;
-      padding: 26px 92px 20px;
+      padding: 22px 26px 16px;
       text-align: center;
     }
 
     .stamp {
       position: absolute;
     }
-    .stamp--departed { top: 14px; left: 10px; width: 92px; }
-    .stamp--paris { top: 10px; right: 10px; width: 64px; }
+    .stamp--departed { top: 16px; left: 14px; width: 82px; }
+    .stamp--paris { top: 12px; right: 16px; width: 78px; }
 
     .compass-top {
-      width: 46px;
-      height: 46px;
-      margin: 0 auto 8px;
+      width: 50px;
+      height: 50px;
+      margin: 2px auto 8px;
     }
 
     .brand-name {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 800;
-      font-size: clamp(1.5rem, 8vw, 1.9rem);
-      letter-spacing: 0.3px;
+      font-size: clamp(1.85rem, 9.2vw, 2.3rem);
+      letter-spacing: 0.4px;
       color: var(--cv-dark-green);
       line-height: 1.05;
     }
@@ -128,29 +144,29 @@
     .brand-script {
       font-family: 'Tangerine', 'EB Garamond', cursive, serif;
       font-weight: 700;
-      font-size: clamp(2.5rem, 12vw, 3rem);
+      font-size: clamp(2.9rem, 13.5vw, 3.5rem);
       color: var(--cv-dark-green);
-      line-height: 1;
-      margin-top: -4px;
+      line-height: 0.8;
+      margin-top: -6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 14px;
     }
 
     .brand-script::before,
     .brand-script::after {
       content: "";
       height: 1px;
-      width: 26px;
+      width: 34px;
       background: var(--cv-gold);
       opacity: 0.8;
     }
 
     .brand-sub {
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 3px;
+      font-size: 0.74rem;
+      letter-spacing: 3.5px;
       text-transform: uppercase;
       color: var(--cv-text);
       opacity: 0.75;
@@ -160,17 +176,17 @@
     .agency-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       margin-top: 12px;
-      padding: 8px 20px;
+      padding: 8px 24px;
       border-radius: 20px;
       background: var(--cv-dark-green);
       border: 1px solid var(--cv-gold);
       color: var(--cv-gold);
       font-family: 'EB Garamond', Georgia, serif;
       font-weight: 600;
-      font-size: 0.75rem;
-      letter-spacing: 2.5px;
+      font-size: 0.8rem;
+      letter-spacing: 2.8px;
       text-transform: uppercase;
     }
     .agency-badge .dot { opacity: 0.7; }
@@ -188,87 +204,92 @@
 
     .identity {
       text-align: center;
-      padding: 22px 24px 6px;
+      padding: 16px 26px 2px;
     }
 
     .identity .name {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 700;
-      font-size: clamp(1.4rem, 6.5vw, 1.7rem);
+      font-size: clamp(1.6rem, 7.4vw, 1.95rem);
       color: var(--cv-dark-green);
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
     }
 
     .identity .role {
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 700;
-      font-size: 0.76rem;
-      letter-spacing: 2.5px;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--cv-gold-hover);
-      margin-top: 6px;
+      margin-top: 5px;
     }
 
     .identity .tagline {
       font-family: 'EB Garamond', Georgia, serif;
       font-style: italic;
-      font-size: 1rem;
+      font-size: 1.08rem;
       color: var(--cv-text);
-      opacity: 0.88;
-      margin-top: 12px;
+      opacity: 0.9;
+      margin-top: 10px;
     }
 
     .identity .flourish {
-      width: 64px;
+      width: 68px;
       height: auto;
-      margin: 12px auto 0;
+      margin: 10px auto 0;
       opacity: 0.9;
     }
 
     /* ===== Contact rows ===== */
 
     .contact {
-      padding: 18px 22px 22px;
+      padding: 12px 26px 16px;
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 7px;
     }
 
     .btn {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 11px 14px;
-      border-radius: 6px;
+      gap: 15px;
+      padding: 9px 16px;
+      border-radius: 8px;
       font-family: Arial, Helvetica, sans-serif;
-      background: #FBF8F0;
-      border: 1px solid rgba(45,80,22,0.22);
+      background: rgba(251,247,236,0.55);
+      border: 1px solid rgba(178,140,74,0.4);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 1px 3px rgba(94,68,28,0.06);
       color: var(--cv-text);
       cursor: pointer;
       width: 100%;
       text-align: left;
-      transition: border-color 0.18s ease, transform 0.1s ease;
+      transition: border-color 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
     }
-    .btn:hover { border-color: var(--cv-gold); transform: translateY(-1px); }
+    .btn:hover {
+      border-color: var(--cv-gold);
+      transform: translateY(-1px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 4px 10px rgba(94,68,28,0.1);
+    }
 
     .btn-icon {
       flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      border-radius: 6px;
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
     }
 
     .btn-label {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       flex: 1;
       min-width: 0;
     }
 
     .btn-type {
-      font-size: 0.62rem;
-      letter-spacing: 1.8px;
+      font-size: 0.64rem;
+      letter-spacing: 1.9px;
       text-transform: uppercase;
       color: var(--cv-muted);
       font-weight: 700;
@@ -276,7 +297,7 @@
 
     .btn-value {
       font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1.02rem;
+      font-size: 1.06rem;
       font-weight: 500;
       color: var(--cv-text);
       word-break: break-all;
@@ -285,43 +306,48 @@
     /* ===== Save button — Option 2 ticket/plaque style ===== */
 
     .btn-save-wrap {
-      margin-top: 4px;
-      padding: 0 4px;
+      margin-top: 2px;
+      padding: 0 2px;
     }
 
     .btn-save {
       justify-content: center;
-      gap: 12px;
-      padding: 14px 16px;
-      background: var(--cv-dark-green);
+      gap: 14px;
+      padding: 12px 18px;
+      background: linear-gradient(180deg, #24451A 0%, var(--cv-dark-green) 100%);
       border: 1px solid var(--cv-gold);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 6px 18px rgba(30,58,15,0.28);
       color: var(--cv-gold);
       font-family: 'EB Garamond', Georgia, serif;
       font-weight: 600;
-      letter-spacing: 2.5px;
-      font-size: 0.98rem;
+      letter-spacing: 2.8px;
+      font-size: 1.02rem;
       text-transform: uppercase;
       position: relative;
       /* ticket/plaque silhouette: notched corners cut into the shape */
       clip-path: polygon(
-        12px 0, calc(100% - 12px) 0, 100% 12px,
-        100% calc(100% - 12px), calc(100% - 12px) 100%,
-        12px 100%, 0 calc(100% - 12px), 0 12px
+        14px 0, calc(100% - 14px) 0, 100% 14px,
+        100% calc(100% - 14px), calc(100% - 14px) 100%,
+        14px 100%, 0 calc(100% - 14px), 0 14px
       );
     }
-    .btn-save:hover { border-color: #E4C876; transform: translateY(-1px); }
+    .btn-save:hover {
+      border-color: #E4C876;
+      transform: translateY(-1px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 8px 22px rgba(30,58,15,0.34);
+    }
     .btn-save::before,
     .btn-save::after {
       content: "";
       position: absolute;
-      top: 6px;
-      bottom: 6px;
+      top: 7px;
+      bottom: 7px;
       width: 1px;
-      background: rgba(201,168,76,0.5);
+      background: rgba(201,168,76,0.55);
     }
-    .btn-save::before { left: 9px; }
-    .btn-save::after { right: 9px; }
-    .btn-save .btn-icon { width: 26px; height: 26px; border-radius: 0; }
+    .btn-save::before { left: 11px; }
+    .btn-save::after { right: 11px; }
+    .btn-save .btn-icon { width: 27px; height: 27px; border-radius: 0; }
 
     /* ===== Corner map accent ===== */
 
@@ -329,9 +355,9 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      width: 96px;
-      height: 96px;
-      opacity: 0.14;
+      width: 108px;
+      height: 108px;
+      opacity: 0.18;
       pointer-events: none;
       z-index: 0;
     }
@@ -340,7 +366,7 @@
 
     .card-footer {
       text-align: center;
-      padding: 4px 20px 22px;
+      padding: 2px 20px 16px;
       position: relative;
       z-index: 1;
     }
