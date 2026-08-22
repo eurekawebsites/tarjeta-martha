@@ -41,7 +41,8 @@
       flex-direction: column;
       align-items: center;
       background: #E8DFC8;
-      padding: 28px 20px 36px;
+      padding: 36px 20px;
+      justify-content: center;
     }
 
     /* ===== Card shell ===== */
@@ -54,10 +55,10 @@
         #F5EFDF;
       color: var(--cv-text);
       width: 100%;
-      max-width: 420px;
-      border-radius: 18px;
+      max-width: 720px;
+      border-radius: 22px;
       border: 1px solid rgba(201,168,76,0.55);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 14px 40px rgba(42,35,24,0.16);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 20px 60px rgba(42,35,24,0.2);
       overflow: hidden;
     }
 
@@ -67,15 +68,15 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      opacity: 0.5;
+      opacity: 0.75;
       background-image:
-        radial-gradient(circle at 20% 15%, rgba(180,150,90,0.10) 0, transparent 22%),
-        radial-gradient(circle at 80% 10%, rgba(180,150,90,0.08) 0, transparent 18%),
-        radial-gradient(circle at 15% 60%, rgba(180,150,90,0.09) 0, transparent 20%),
-        radial-gradient(circle at 85% 55%, rgba(180,150,90,0.07) 0, transparent 24%),
-        radial-gradient(circle at 50% 85%, rgba(180,150,90,0.09) 0, transparent 26%),
-        repeating-linear-gradient(115deg, rgba(120,100,60,0.035) 0px, rgba(120,100,60,0.035) 1px, transparent 1px, transparent 90px),
-        repeating-linear-gradient(25deg, rgba(120,100,60,0.03) 0px, rgba(120,100,60,0.03) 1px, transparent 1px, transparent 110px);
+        radial-gradient(circle at 20% 15%, rgba(170,138,74,0.16) 0, transparent 22%),
+        radial-gradient(circle at 80% 10%, rgba(170,138,74,0.13) 0, transparent 18%),
+        radial-gradient(circle at 15% 60%, rgba(170,138,74,0.14) 0, transparent 20%),
+        radial-gradient(circle at 85% 55%, rgba(170,138,74,0.12) 0, transparent 24%),
+        radial-gradient(circle at 50% 85%, rgba(170,138,74,0.14) 0, transparent 26%),
+        repeating-linear-gradient(115deg, rgba(120,100,60,0.06) 0px, rgba(120,100,60,0.06) 1px, transparent 1px, transparent 90px),
+        repeating-linear-gradient(25deg, rgba(120,100,60,0.05) 0px, rgba(120,100,60,0.05) 1px, transparent 1px, transparent 110px);
       z-index: 0;
     }
 
@@ -87,53 +88,68 @@
     /* ticket notches at the mid divider */
     .card-cv .notch {
       position: absolute;
-      top: 224px;
-      width: 22px;
-      height: 22px;
+      top: 340px;
+      width: 28px;
+      height: 28px;
       background: #E8DFC8;
       border-radius: 50%;
       z-index: 2;
     }
-    .card-cv .notch--l { left: -11px; }
-    .card-cv .notch--r { right: -11px; }
+    .card-cv .notch--l { left: -14px; }
+    .card-cv .notch--r { right: -14px; }
+
+    @media (min-width: 560px) {
+      .card-cv .notch { top: 392px; }
+    }
 
     /* ===== Top branding ===== */
 
     .top {
       position: relative;
-      padding: 30px 18px 22px;
+      padding: 40px 24px 28px;
       text-align: center;
     }
 
-    @media (min-width: 380px) {
-      .top { padding-left: 28px; padding-right: 28px; }
+    @media (min-width: 420px) {
+      .top { padding: 46px 40px 30px; }
+    }
+    @media (min-width: 560px) {
+      .top { padding: 54px 92px 34px; }
     }
 
     .stamp {
       position: absolute;
       color: var(--cv-gold);
-      opacity: 0.85;
+      opacity: 0.88;
     }
-    .stamp--departed { top: 18px; left: 12px; width: 74px; }
-    .stamp--paris { top: 14px; right: 12px; width: 62px; }
+    .stamp--departed { top: 20px; left: 16px; width: 88px; }
+    .stamp--paris { top: 16px; right: 16px; width: 72px; }
 
-    @media (min-width: 380px) {
-      .stamp--departed { width: 92px; }
-      .stamp--paris { width: 78px; }
+    @media (min-width: 420px) {
+      .stamp--departed { top: 24px; left: 24px; width: 108px; }
+      .stamp--paris { top: 20px; right: 24px; width: 88px; }
+    }
+    @media (min-width: 560px) {
+      .stamp--departed { top: 30px; left: 34px; width: 128px; }
+      .stamp--paris { top: 26px; right: 34px; width: 104px; }
     }
 
     .compass-top {
-      width: 46px;
-      height: 46px;
-      margin: 2px auto 10px;
+      width: 52px;
+      height: 52px;
+      margin: 4px auto 12px;
       color: var(--cv-gold);
+    }
+
+    @media (min-width: 560px) {
+      .compass-top { width: 64px; height: 64px; margin: 6px auto 16px; }
     }
 
     .brand-name {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 800;
-      font-size: clamp(1.32rem, 7.6vw, 2.4rem);
-      letter-spacing: 0.3px;
+      font-size: clamp(2rem, 10.5vw, 3.4rem);
+      letter-spacing: 0.5px;
       color: var(--cv-dark-green);
       line-height: 1.05;
     }
@@ -141,49 +157,53 @@
     .brand-script {
       font-family: 'Tangerine', 'EB Garamond', cursive, serif;
       font-weight: 700;
-      font-size: clamp(2.6rem, 11vw, 3.4rem);
+      font-size: clamp(3.2rem, 14vw, 4.8rem);
       color: var(--cv-dark-green);
       line-height: 1;
-      margin-top: -4px;
+      margin-top: -6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 16px;
     }
 
     .brand-script::before,
     .brand-script::after {
       content: "";
       height: 1px;
-      width: 30px;
+      width: 44px;
       background: var(--cv-gold);
       opacity: 0.8;
     }
 
+    @media (min-width: 560px) {
+      .brand-script::before, .brand-script::after { width: 60px; }
+    }
+
     .brand-sub {
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 3px;
+      font-size: 0.86rem;
+      letter-spacing: 3.5px;
       text-transform: uppercase;
       color: var(--cv-text);
       opacity: 0.75;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .agency-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      padding: 8px 22px;
-      border-radius: 20px;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 11px 30px;
+      border-radius: 24px;
       background: var(--cv-dark-green);
       border: 1px solid var(--cv-gold);
       color: var(--cv-gold);
       font-family: 'EB Garamond', Georgia, serif;
       font-weight: 600;
-      font-size: 0.78rem;
-      letter-spacing: 2.5px;
+      font-size: 0.94rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
     }
     .agency-badge .dot { opacity: 0.7; }
@@ -193,21 +213,25 @@
     .divider {
       position: relative;
       height: 1px;
-      margin: 4px 24px 0;
-      border-top: 2px dotted rgba(45,80,22,0.35);
+      margin: 4px 34px 0;
+      border-top: 3px dotted rgba(45,80,22,0.4);
     }
 
     /* ===== Identity block ===== */
 
     .identity {
       text-align: center;
-      padding: 26px 28px 6px;
+      padding: 34px 28px 8px;
+    }
+
+    @media (min-width: 560px) {
+      .identity { padding: 42px 40px 10px; }
     }
 
     .identity .name {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 700;
-      font-size: clamp(1.5rem, 6.5vw, 1.9rem);
+      font-size: clamp(1.9rem, 8vw, 2.7rem);
       color: var(--cv-dark-green);
       letter-spacing: 0.5px;
     }
@@ -215,26 +239,26 @@
     .identity .role {
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 2.5px;
+      font-size: 1rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--cv-gold-hover);
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .identity .tagline {
       font-family: 'EB Garamond', Georgia, serif;
       font-style: italic;
-      font-size: 1.02rem;
+      font-size: 1.24rem;
       color: var(--cv-text);
       opacity: 0.88;
-      margin-top: 12px;
+      margin-top: 16px;
     }
 
     .identity .flourish {
-      width: 70px;
-      height: 12px;
-      margin: 14px auto 0;
+      width: 84px;
+      height: 14px;
+      margin: 18px auto 0;
       color: var(--cv-gold);
       opacity: 0.85;
     }
@@ -242,18 +266,22 @@
     /* ===== Contact rows ===== */
 
     .contact {
-      padding: 18px 24px 22px;
+      padding: 26px 28px 28px;
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 14px;
+    }
+
+    @media (min-width: 560px) {
+      .contact { padding: 32px 44px 34px; gap: 16px; }
     }
 
     .btn {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 12px 14px;
-      border-radius: 6px;
+      gap: 18px;
+      padding: 16px 18px;
+      border-radius: 7px;
       font-family: Arial, Helvetica, sans-serif;
       background: #FBF8F0;
       border: 1px solid rgba(45,80,22,0.22);
@@ -267,27 +295,27 @@
 
     .btn-icon-wrap {
       flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      border-radius: 5px;
+      width: 46px;
+      height: 46px;
+      border-radius: 6px;
       background: var(--cv-dark-green);
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .btn-icon { width: 18px; height: 18px; }
+    .btn-icon { width: 22px; height: 22px; }
 
     .btn-label {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       flex: 1;
       min-width: 0;
     }
 
     .btn-type {
-      font-size: 0.62rem;
-      letter-spacing: 1.8px;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--cv-muted);
       font-weight: 700;
@@ -295,81 +323,96 @@
 
     .btn-value {
       font-family: 'EB Garamond', Georgia, serif;
-      font-size: 0.98rem;
+      font-size: 1.18rem;
       font-weight: 500;
       color: var(--cv-text);
       word-break: break-all;
     }
 
-    /* ===== Save button — Option 2 plaque style ===== */
+    /* ===== Save button — Option 2 ticket/plaque style ===== */
+
+    .btn-save-wrap {
+      margin-top: 6px;
+      padding: 0 6px;
+    }
 
     .btn-save {
-      margin-top: 4px;
       justify-content: center;
-      gap: 12px;
-      padding: 14px 16px;
+      gap: 14px;
+      padding: 17px 20px;
       background: var(--cv-dark-green);
       border: 1px solid var(--cv-gold);
-      border-radius: 4px;
       color: var(--cv-gold);
       font-family: 'EB Garamond', Georgia, serif;
       font-weight: 600;
-      letter-spacing: 2.5px;
-      font-size: 0.95rem;
+      letter-spacing: 3px;
+      font-size: 1.08rem;
       text-transform: uppercase;
       position: relative;
+      /* ticket/plaque silhouette: notched corners cut into the shape */
+      clip-path: polygon(
+        14px 0, calc(100% - 14px) 0, 100% 14px,
+        100% calc(100% - 14px), calc(100% - 14px) 100%,
+        14px 100%, 0 calc(100% - 14px), 0 14px
+      );
     }
     .btn-save:hover { border-color: #E4C876; transform: translateY(-1px); }
     .btn-save::before,
     .btn-save::after {
       content: "";
       position: absolute;
-      top: 5px;
-      bottom: 5px;
+      top: 7px;
+      bottom: 7px;
       width: 1px;
       background: rgba(201,168,76,0.5);
     }
-    .btn-save::before { left: 8px; }
-    .btn-save::after { right: 8px; }
-    .btn-save .btn-icon { width: 20px; height: 20px; }
+    .btn-save::before { left: 11px; }
+    .btn-save::after { right: 11px; }
+    .btn-save .btn-icon { width: 24px; height: 24px; }
 
     /* ===== Corner map accent ===== */
 
     .map-accent {
       position: absolute;
-      bottom: 66px;
-      right: 10px;
-      width: 90px;
-      height: 90px;
+      bottom: 96px;
+      right: 14px;
+      width: 130px;
+      height: 130px;
       color: var(--cv-dark-green);
-      opacity: 0.08;
+      opacity: 0.1;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* ===== Footer ===== */
-
-    footer {
-      text-align: center;
-      padding: 20px 0 12px;
+    @media (min-width: 560px) {
+      .map-accent { width: 170px; height: 170px; bottom: 110px; right: 20px; }
     }
-    footer a {
+
+    /* ===== Footer (inside card) ===== */
+
+    .card-footer {
+      text-align: center;
+      padding: 4px 24px 26px;
+      position: relative;
+      z-index: 1;
+    }
+    .card-footer a {
       display: inline-flex;
       align-items: center;
-      font-size: 11px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(42,35,24,0.45);
+      color: rgba(42,35,24,0.5);
       transition: color 0.2s;
     }
-    footer a:hover { color: rgba(42,35,24,0.75); }
-    footer img {
-      width: 14px;
-      height: 14px;
+    .card-footer a:hover { color: rgba(42,35,24,0.8); }
+    .card-footer img {
+      width: 16px;
+      height: 16px;
       display: inline-block;
       vertical-align: -3px;
-      margin-right: 6px;
+      margin-right: 7px;
     }
   </style>
 </head>
@@ -503,14 +546,16 @@
           </span>
         </button>
 
-        <button class="btn btn-save" onclick="saveContactCV()" type="button">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/>
-            <polyline points="17 21 17 13 7 13 7 21"/>
-            <polyline points="7 3 7 8 15 8"/>
-          </svg>
-          Guardar contacto
-        </button>
+        <div class="btn-save-wrap">
+          <button class="btn btn-save" onclick="saveContactCV()" type="button">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/>
+              <polyline points="17 21 17 13 7 13 7 21"/>
+              <polyline points="7 3 7 8 15 8"/>
+            </svg>
+            Guardar contacto
+          </button>
+        </div>
 
       </div>
 
@@ -524,14 +569,14 @@
         <path d="M94 50 L56 45 L50 50 L56 55 Z" fill="currentColor" opacity="0.6"/>
       </svg>
 
+      <div class="card-footer">
+        <a href="https://www.eurekawebsites.tech/" target="_blank" rel="noopener noreferrer">
+          <img src="images/eureka/eureka-b-64.png" alt="">POWERED BY EUREKA TECH
+        </a>
+      </div>
+
     </div>
   </div>
-
-  <footer>
-    <a href="https://www.eurekawebsites.tech/" target="_blank" rel="noopener noreferrer">
-      <img src="images/eureka/eureka-b-64.png" alt="">POWERED BY EUREKA TECH
-    </a>
-  </footer>
 
   <script>
     function copyClabeCV(btn) {
