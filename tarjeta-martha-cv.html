@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://eurekawebsites.github.io/tarjeta-martha/images/brand/og-share-1200x630.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@600;700;800&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/brand-tokens.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,386 +40,277 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       background: #E8DFC8;
       padding: 24px 12px;
     }
 
-    /* ===== Card shell ===== */
-    /* Background tones sampled directly from the approved mockup's paper
-       (measured pixel colors, not an invented texture): open paper reads
-       ~#F6EEE0–#F7EAD8, corners/edges darken toward ~#E0CCAE–#D2B58D. */
+    /* ===== Card shell =====
+       Silhouette, texture, border, notches, divider, and corner ornament
+       all come from the supplied card-background artwork — not CSS. */
 
     .card-cv {
       position: relative;
-      background:
-        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(247,234,216,0.9) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 8% 4%, rgba(228,206,172,0.85) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 50% at 94% 6%, rgba(224,204,174,0.8) 0%, transparent 55%),
-        radial-gradient(ellipse 55% 45% at 6% 96%, rgba(210,181,141,0.75) 0%, transparent 55%),
-        radial-gradient(ellipse 55% 45% at 96% 94%, rgba(212,180,132,0.7) 0%, transparent 55%),
-        radial-gradient(ellipse 90% 70% at 50% 45%, #F6EEE0 0%, #EDDFC4 100%);
-      color: var(--cv-text);
       width: min(calc(100vw - 24px), 430px);
-      border-radius: 18px;
-      border: 1px solid rgba(178,140,74,0.6);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 20px 48px rgba(42,35,24,0.22);
+      aspect-ratio: 984 / 1599;
       overflow: hidden;
+      border-radius: 22px;
     }
 
-    /* fine crack/fiber linework, matched to the mockup's visible paper grain */
-    .card-cv::before {
-      content: "";
+    .card-bg {
       position: absolute;
       inset: 0;
-      pointer-events: none;
-      opacity: 0.55;
-      background-image:
-        repeating-linear-gradient(113deg, rgba(150,118,64,0.07) 0px, rgba(150,118,64,0.07) 1px, transparent 1px, transparent 54px),
-        repeating-linear-gradient(24deg, rgba(150,118,64,0.06) 0px, rgba(150,118,64,0.06) 1px, transparent 1px, transparent 68px),
-        repeating-linear-gradient(-62deg, rgba(150,118,64,0.045) 0px, rgba(150,118,64,0.045) 1px, transparent 1px, transparent 82px);
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
       z-index: 0;
+      pointer-events: none;
     }
 
-    /* soft vignette pulling the corners darker, as measured in the approved reference */
-    .card-cv::after {
-      content: "";
+    .card-cv .content {
       position: absolute;
       inset: 0;
-      pointer-events: none;
-      opacity: 1;
-      box-shadow: inset 0 0 70px rgba(122,94,48,0.16), inset 0 0 140px rgba(122,94,48,0.08);
-      z-index: 0;
-    }
-
-    .card-cv .inner {
-      position: relative;
       z-index: 1;
     }
 
-    /* ticket notches at the mid divider */
-    .card-cv .notch {
+    /* ===== Header lockup =====
+       Single finished image: London stamp, compass, Paris stamp,
+       COORDENADA / Viajes, VIAJES QUE CONECTAN, AGENCIA DE VIAJES. */
+
+    /* The header-lockup canvas carries transparent padding above/below its
+       actual artwork (content occupies y 18%-84% of the 1122x1376 PNG).
+       Sized/positioned so the artwork's visible content starts just below
+       the card top and ends right above the divider baked into the
+       card-background (measured at 40.5% of card height), not by the
+       manifest's rough width estimate which ignored the padding. */
+    .header-lockup {
       position: absolute;
-      top: 241px;
-      width: 22px;
-      height: 22px;
-      background: #E8DFC8;
-      border-radius: 50%;
-      z-index: 2;
-    }
-    .card-cv .notch--l { left: -11px; }
-    .card-cv .notch--r { right: -11px; }
-
-    /* ===== Top branding =====
-       Proportions measured from the approved mockup at 947px card width:
-       London stamp d=170px (17.9%), Paris tag w=175px (18.5%), compass
-       d=110px (11.6%), COORDENADA cap-height 50px (5.3%). Scaled to 430px. */
-
-    .top {
-      position: relative;
-      padding: 22px 26px 16px;
-      text-align: center;
+      top: -7.25%;
+      left: 0.85%;
+      width: 75.35%;
     }
 
-    .stamp {
+    /* ===== Lower stack =====
+       Identity, contact rows, save button, and footer are laid out in
+       normal flow inside one absolutely-positioned container that starts
+       right below the divider baked into the card-background (measured at
+       40.5% of card height). Flow layout (not four independently-guessed
+       top:% zones) is what guarantees the four contact rows plus save
+       button never overlap or overflow the card — their combined height is
+       whatever it naturally is, not a fixed percentage guess. */
+    .lower-stack {
       position: absolute;
-    }
-    .stamp--departed { top: 16px; left: 14px; width: 82px; }
-    .stamp--paris { top: 12px; right: 16px; width: 78px; }
-
-    .compass-top {
-      width: 50px;
-      height: 50px;
-      margin: 2px auto 8px;
-    }
-
-    .brand-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: clamp(1.85rem, 9.2vw, 2.3rem);
-      letter-spacing: 0.4px;
-      color: var(--cv-dark-green);
-      line-height: 1.05;
-    }
-
-    .brand-script {
-      font-family: 'Tangerine', 'EB Garamond', cursive, serif;
-      font-weight: 700;
-      font-size: clamp(2.9rem, 13.5vw, 3.5rem);
-      color: var(--cv-dark-green);
-      line-height: 0.8;
-      margin-top: -6px;
+      top: 41.5%;
+      left: 0;
+      width: 100%;
+      bottom: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
+      flex-direction: column;
     }
-
-    .brand-script::before,
-    .brand-script::after {
-      content: "";
-      height: 1px;
-      width: 34px;
-      background: var(--cv-gold);
-      opacity: 0.8;
-    }
-
-    .brand-sub {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.74rem;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      color: var(--cv-text);
-      opacity: 0.75;
-      margin-top: 6px;
-    }
-
-    .agency-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-top: 12px;
-      padding: 8px 24px;
-      border-radius: 20px;
-      background: var(--cv-dark-green);
-      border: 1px solid var(--cv-gold);
-      color: var(--cv-gold);
-      font-family: 'EB Garamond', Georgia, serif;
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 2.8px;
-      text-transform: uppercase;
-    }
-    .agency-badge .dot { opacity: 0.7; }
-
-    /* ===== Divider ===== */
-
-    .divider {
-      position: relative;
-      height: 1px;
-      margin: 4px 22px 0;
-      border-top: 2px dotted rgba(45,80,22,0.35);
-    }
-
-    /* ===== Identity block ===== */
 
     .identity {
+      width: 84%;
+      margin: 0 auto;
       text-align: center;
-      padding: 16px 26px 2px;
+      flex-shrink: 0;
     }
 
     .identity .name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(1.6rem, 7.4vw, 1.95rem);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(1.1rem, 5.2vw, 1.35rem);
       color: var(--cv-dark-green);
       letter-spacing: 0.3px;
     }
 
     .identity .role {
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 3px;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(0.66rem, 2.5vw, 0.76rem);
+      letter-spacing: 2.2px;
       text-transform: uppercase;
       color: var(--cv-gold-hover);
-      margin-top: 5px;
+      margin-top: 2px;
     }
 
     .identity .tagline {
       font-family: 'EB Garamond', Georgia, serif;
       font-style: italic;
-      font-size: 1.08rem;
+      font-weight: 400;
+      font-size: clamp(0.72rem, 2.9vw, 0.84rem);
       color: var(--cv-text);
       opacity: 0.9;
-      margin-top: 10px;
+      margin-top: 3px;
     }
 
     .identity .flourish {
-      width: 68px;
+      width: 10%;
       height: auto;
-      margin: 10px auto 0;
+      margin: 2px auto 0;
       opacity: 0.9;
     }
 
-    /* ===== Contact rows ===== */
+    /* ===== Contact stack ===== */
 
     .contact {
-      padding: 12px 26px 16px;
+      width: 52%;
+      margin: 0.8% auto 0;
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 0.3%;
+      flex-shrink: 0;
     }
 
     .btn {
+      position: relative;
+      display: block;
+      width: 100%;
+      cursor: pointer;
+      border: 0;
+      background: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .btn-row-bg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .btn-inner {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
-      gap: 15px;
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-family: Arial, Helvetica, sans-serif;
-      background: rgba(251,247,236,0.55);
-      border: 1px solid rgba(178,140,74,0.4);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 1px 3px rgba(94,68,28,0.06);
-      color: var(--cv-text);
-      cursor: pointer;
-      width: 100%;
-      text-align: left;
-      transition: border-color 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
-    }
-    .btn:hover {
-      border-color: var(--cv-gold);
-      transform: translateY(-1px);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 4px 10px rgba(94,68,28,0.1);
+      gap: 4.5%;
+      padding: 0 5.5%;
     }
 
     .btn-icon {
       flex-shrink: 0;
-      width: 34px;
-      height: 34px;
-      border-radius: 7px;
+      width: 19%;
+      height: auto;
     }
 
     .btn-label {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 1px;
       flex: 1;
       min-width: 0;
     }
 
     .btn-type {
-      font-size: 0.64rem;
-      letter-spacing: 1.9px;
+      font-size: clamp(0.46rem, 1.6vw, 0.56rem);
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       color: var(--cv-muted);
       font-weight: 700;
+      font-family: Arial, Helvetica, sans-serif;
+      white-space: nowrap;
     }
 
     .btn-value {
       font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1.06rem;
+      font-size: clamp(0.72rem, 2.9vw, 0.88rem);
       font-weight: 500;
       color: var(--cv-text);
       word-break: break-all;
     }
 
-    /* ===== Save button — Option 2 ticket/plaque style ===== */
+    /* ===== Save contact ===== */
 
     .btn-save-wrap {
-      margin-top: 2px;
-      padding: 0 2px;
+      width: 58%;
+      margin: 0.5% auto 0;
+      flex-shrink: 0;
     }
 
     .btn-save {
+      position: relative;
+      display: block;
+      width: 100%;
+      cursor: pointer;
+      border: 0;
+      background: none;
+      padding: 0;
+    }
+
+    .btn-save-bg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .btn-save-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 14px;
-      padding: 12px 18px;
-      background: linear-gradient(180deg, #24451A 0%, var(--cv-dark-green) 100%);
-      border: 1px solid var(--cv-gold);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 6px 18px rgba(30,58,15,0.28);
-      color: var(--cv-gold);
+      gap: 4%;
+    }
+
+    .btn-save-icon {
+      width: 11%;
+      height: auto;
+    }
+
+    .btn-save-text {
       font-family: 'EB Garamond', Georgia, serif;
       font-weight: 600;
-      letter-spacing: 2.8px;
-      font-size: 1.02rem;
+      letter-spacing: 1.6px;
+      font-size: clamp(0.78rem, 3.1vw, 0.92rem);
       text-transform: uppercase;
-      position: relative;
-      /* ticket/plaque silhouette: notched corners cut into the shape */
-      clip-path: polygon(
-        14px 0, calc(100% - 14px) 0, 100% 14px,
-        100% calc(100% - 14px), calc(100% - 14px) 100%,
-        14px 100%, 0 calc(100% - 14px), 0 14px
-      );
-    }
-    .btn-save:hover {
-      border-color: #E4C876;
-      transform: translateY(-1px);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 8px 22px rgba(30,58,15,0.34);
-    }
-    .btn-save::before,
-    .btn-save::after {
-      content: "";
-      position: absolute;
-      top: 7px;
-      bottom: 7px;
-      width: 1px;
-      background: rgba(201,168,76,0.55);
-    }
-    .btn-save::before { left: 11px; }
-    .btn-save::after { right: 11px; }
-    .btn-save .btn-icon { width: 27px; height: 27px; border-radius: 0; }
-
-    /* ===== Corner map accent ===== */
-
-    .map-accent {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 108px;
-      height: 108px;
-      opacity: 0.18;
-      pointer-events: none;
-      z-index: 0;
+      color: var(--cv-gold);
+      white-space: nowrap;
     }
 
     /* ===== Footer (inside card) ===== */
 
     .card-footer {
+      width: 100%;
       text-align: center;
-      padding: 2px 20px 16px;
-      position: relative;
-      z-index: 1;
+      margin-top: auto;
+      padding-top: 0.2%;
+      padding-bottom: 1.2%;
+      flex-shrink: 0;
     }
     .card-footer a {
       display: inline-flex;
       align-items: center;
-      font-size: 11px;
+      font-size: clamp(0.5rem, 1.9vw, 0.6rem);
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(42,35,24,0.5);
+      color: rgba(42,35,24,0.55);
       transition: color 0.2s;
+      white-space: nowrap;
     }
-    .card-footer a:hover { color: rgba(42,35,24,0.8); }
+    .card-footer a:hover { color: rgba(42,35,24,0.85); }
     .card-footer img {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       display: inline-block;
-      vertical-align: -3px;
-      margin-right: 6px;
+      vertical-align: -2px;
+      margin-right: 5px;
     }
   </style>
 </head>
 <body>
 
   <div class="card-cv">
-    <div class="notch notch--l"></div>
-    <div class="notch notch--r"></div>
+    <img class="card-bg" src="images/coordenada-card-v2/card-background.webp" alt="">
 
-    <div class="inner">
+    <div class="content">
 
-      <div class="top">
+      <img class="header-lockup" src="images/coordenada-card-v2/header-lockup.webp" alt="Coordenada Viajes — Viajes que conectan — Agencia de Viajes">
 
-        <img class="stamp stamp--departed" src="images/coordenada-card/webp-400/stamp-london.webp" srcset="images/coordenada-card/webp-400/stamp-london.webp 400w, images/coordenada-card/webp-800/stamp-london.webp 800w" sizes="92px" alt="">
-
-        <img class="stamp stamp--paris" src="images/coordenada-card/webp-400/stamp-paris.webp" srcset="images/coordenada-card/webp-400/stamp-paris.webp 400w, images/coordenada-card/webp-800/stamp-paris.webp 800w" sizes="64px" alt="">
-
-        <img class="compass-top" src="images/coordenada-card/webp-400/compass-top.webp" srcset="images/coordenada-card/webp-400/compass-top.webp 400w, images/coordenada-card/webp-800/compass-top.webp 800w" sizes="46px" alt="">
-
-        <h1 class="brand-name">COORDENADA</h1>
-        <p class="brand-script">Viajes</p>
-        <p class="brand-sub">Viajes que conectan</p>
-
-        <div class="agency-badge">
-          <span class="dot">•</span> Agencia de Viajes <span class="dot">•</span>
-        </div>
-
-      </div>
-
-      <div class="divider"></div>
+      <div class="lower-stack">
 
       <div class="identity">
-        <h2 class="name">Martha Domínguez</h2>
+        <h1 class="name">Martha Domínguez</h1>
         <p class="role">Asesora de Viajes</p>
         <p class="tagline">Tu destino tiene una coordenada.</p>
         <img class="flourish" src="images/coordenada-card/webp-400/divider-starburst.webp" srcset="images/coordenada-card/webp-400/divider-starburst.webp 400w, images/coordenada-card/webp-800/divider-starburst.webp 800w" sizes="64px" alt="">
@@ -427,49 +318,61 @@
 
       <div class="contact">
 
-        <a class="btn" href="https://wa.me/5215517284050" target="_blank" rel="noopener noreferrer">
-          <img class="btn-icon" src="images/coordenada-card/webp-400/icon-whatsapp.webp" srcset="images/coordenada-card/webp-400/icon-whatsapp.webp 400w, images/coordenada-card/webp-800/icon-whatsapp.webp 800w" sizes="40px" alt="">
-          <span class="btn-label">
-            <span class="btn-type">WhatsApp</span>
-            <span class="btn-value">+52 55 1728 4050</span>
+        <a class="btn" href="https://wa.me/5215517284050" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +52 55 1728 4050">
+          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
+          <span class="btn-inner">
+            <img class="btn-icon" src="images/coordenada-card-v2/icon-whatsapp.webp" alt="">
+            <span class="btn-label">
+              <span class="btn-type">WhatsApp</span>
+              <span class="btn-value">+52 55 1728 4050</span>
+            </span>
           </span>
         </a>
 
-        <a class="btn" href="https://www.instagram.com/coordenada.viajes/" target="_blank" rel="noopener noreferrer">
-          <img class="btn-icon" src="images/coordenada-card/webp-400/icon-instagram.webp" srcset="images/coordenada-card/webp-400/icon-instagram.webp 400w, images/coordenada-card/webp-800/icon-instagram.webp 800w" sizes="40px" alt="">
-          <span class="btn-label">
-            <span class="btn-type">Instagram</span>
-            <span class="btn-value">@coordenada.viajes</span>
+        <a class="btn" href="https://www.instagram.com/coordenada.viajes/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @coordenada.viajes">
+          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
+          <span class="btn-inner">
+            <img class="btn-icon" src="images/coordenada-card-v2/icon-instagram.webp" alt="">
+            <span class="btn-label">
+              <span class="btn-type">Instagram</span>
+              <span class="btn-value">@coordenada.viajes</span>
+            </span>
           </span>
         </a>
 
-        <a class="btn" href="https://coordenadaviajes.com" target="_blank" rel="noopener noreferrer">
-          <img class="btn-icon" src="images/coordenada-card/webp-400/icon-website.webp" srcset="images/coordenada-card/webp-400/icon-website.webp 400w, images/coordenada-card/webp-800/icon-website.webp 800w" sizes="40px" alt="">
-          <span class="btn-label">
-            <span class="btn-type">Sitio web</span>
-            <span class="btn-value">coordenadaviajes.com</span>
+        <a class="btn" href="https://coordenadaviajes.com" target="_blank" rel="noopener noreferrer" aria-label="Sitio web coordenadaviajes.com">
+          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
+          <span class="btn-inner">
+            <img class="btn-icon" src="images/coordenada-card-v2/icon-website.webp" alt="">
+            <span class="btn-label">
+              <span class="btn-type">Sitio web</span>
+              <span class="btn-value">coordenadaviajes.com</span>
+            </span>
           </span>
         </a>
 
-        <button class="btn" onclick="copyClabeCV(this)" type="button">
-          <img class="btn-icon" src="images/coordenada-card/webp-400/icon-bank.webp" srcset="images/coordenada-card/webp-400/icon-bank.webp 400w, images/coordenada-card/webp-800/icon-bank.webp 800w" sizes="40px" alt="">
-          <span class="btn-label">
-            <span class="btn-type">Clabe interbancaria BBVA</span>
-            <span class="btn-value" id="clabe-cv">012180015019864949</span>
+        <button class="btn" onclick="copyClabeCV(this)" type="button" aria-label="Copiar CLABE interbancaria BBVA">
+          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
+          <span class="btn-inner">
+            <img class="btn-icon" src="images/coordenada-card-v2/icon-bank.webp" alt="">
+            <span class="btn-label">
+              <span class="btn-type">Clabe interbancaria BBVA</span>
+              <span class="btn-value" id="clabe-cv">012180015019864949</span>
+            </span>
           </span>
         </button>
 
-        <div class="btn-save-wrap">
-          <button class="btn btn-save" onclick="saveContactCV()" type="button">
-            <img class="btn-icon" src="images/coordenada-card/webp-400/icon-save-contact.webp" srcset="images/coordenada-card/webp-400/icon-save-contact.webp 400w, images/coordenada-card/webp-800/icon-save-contact.webp 800w" sizes="26px" alt="">
-            Guardar contacto
-          </button>
-        </div>
-
       </div>
 
-      <!-- subtle compass/map ornament, lower right -->
-      <img class="map-accent" src="images/coordenada-card/webp-400/compass-corner.webp" srcset="images/coordenada-card/webp-400/compass-corner.webp 400w, images/coordenada-card/webp-800/compass-corner.webp 800w" sizes="96px" alt="">
+      <div class="btn-save-wrap">
+        <button class="btn-save" onclick="saveContactCV()" type="button" aria-label="Guardar contacto">
+          <img class="btn-save-bg" src="images/coordenada-card-v2/save-contact-bg.webp" alt="">
+          <span class="btn-save-inner">
+            <img class="btn-save-icon" src="images/coordenada-card-v2/icon-save-contact.webp" alt="">
+            <span class="btn-save-text">Guardar contacto</span>
+          </span>
+        </button>
+      </div>
 
       <div class="card-footer">
         <a href="https://www.eurekawebsites.tech/" target="_blank" rel="noopener noreferrer">
@@ -477,6 +380,7 @@
         </a>
       </div>
 
+      </div>
     </div>
   </div>
 
