@@ -21,15 +21,24 @@
   <meta name="twitter:title" content="Martha Domínguez — Coordenada Viajes">
   <meta name="twitter:description" content="Asesora de Viajes · Viajes personalizados a cualquier rincón del mundo">
   <meta name="twitter:image" content="https://eurekawebsites.github.io/tarjeta-martha/images/brand/og-share-1200x630.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/brand-tokens.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
     body {
       min-height: 100vh;
@@ -45,358 +54,126 @@
       padding: 24px 12px;
     }
 
-    /* ===== Card shell =====
-       Silhouette, texture, border, notches, divider, and corner ornament
-       all come from the supplied card-background artwork — not CSS. */
+    /* ===== Card =====
+       The entire visible card — background, border, notches, stamps,
+       compass, all typography, contact rows, save plaque, and the
+       Eureka footer — is one locked production image. Nothing here
+       draws, positions, or types any visible element; the overlays
+       below are purely invisible click targets. */
 
-    .card-cv {
+    .cv-card {
       position: relative;
       width: min(calc(100vw - 24px), 430px);
       aspect-ratio: 984 / 1599;
-      overflow: hidden;
-      border-radius: 22px;
+      margin-inline: auto;
     }
 
-    .card-bg {
+    .cv-card-art {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill;
-      z-index: 0;
+      object-fit: contain;
+      display: block;
       pointer-events: none;
     }
 
-    .card-cv .content {
+    /* transparent interactive overlays only */
+    .hotspot {
       position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-
-    /* ===== Header lockup =====
-       Single finished image: London stamp, compass, Paris stamp,
-       COORDENADA / Viajes, VIAJES QUE CONECTAN, AGENCIA DE VIAJES. */
-
-    /* The header-lockup canvas carries transparent padding above/below its
-       actual artwork (content occupies y 18%-84% of the 1122x1376 PNG).
-       Sized/positioned so the artwork's visible content starts just below
-       the card top and ends right above the divider baked into the
-       card-background (measured at 40.5% of card height), not by the
-       manifest's rough width estimate which ignored the padding. */
-    .header-lockup {
-      position: absolute;
-      top: -7.25%;
-      left: 0.85%;
-      width: 75.35%;
-    }
-
-    /* ===== Lower stack =====
-       Identity, contact rows, save button, and footer are laid out in
-       normal flow inside one absolutely-positioned container that starts
-       right below the divider baked into the card-background (measured at
-       40.5% of card height). Flow layout (not four independently-guessed
-       top:% zones) is what guarantees the four contact rows plus save
-       button never overlap or overflow the card — their combined height is
-       whatever it naturally is, not a fixed percentage guess. */
-    .lower-stack {
-      position: absolute;
-      top: 41.5%;
-      left: 0;
-      width: 100%;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .identity {
-      width: 84%;
-      margin: 0 auto;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .identity .name {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-weight: 600;
-      font-size: clamp(1.1rem, 5.2vw, 1.35rem);
-      color: var(--cv-dark-green);
-      letter-spacing: 0.3px;
-    }
-
-    .identity .role {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-weight: 500;
-      font-size: clamp(0.66rem, 2.5vw, 0.76rem);
-      letter-spacing: 2.2px;
-      text-transform: uppercase;
-      color: var(--cv-gold-hover);
-      margin-top: 2px;
-    }
-
-    .identity .tagline {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(0.72rem, 2.9vw, 0.84rem);
-      color: var(--cv-text);
-      opacity: 0.9;
-      margin-top: 3px;
-    }
-
-    .identity .flourish {
-      width: 10%;
-      height: auto;
-      margin: 2px auto 0;
-      opacity: 0.9;
-    }
-
-    /* ===== Contact stack ===== */
-
-    .contact {
-      width: 52%;
-      margin: 0.8% auto 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3%;
-      flex-shrink: 0;
-    }
-
-    .btn {
-      position: relative;
       display: block;
-      width: 100%;
-      cursor: pointer;
+      background: transparent;
       border: 0;
-      background: none;
       padding: 0;
-      text-align: left;
+      cursor: pointer;
     }
 
-    .btn-row-bg {
-      display: block;
-      width: 100%;
-      height: auto;
+    /* only show an accessibility focus ring for keyboard users */
+    .hotspot:focus-visible {
+      outline: 2px solid #b98a34;
+      outline-offset: 2px;
     }
 
-    .btn-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      gap: 4.5%;
-      padding: 0 5.5%;
-    }
-
-    .btn-icon {
-      flex-shrink: 0;
-      width: 19%;
-      height: auto;
-    }
-
-    .btn-label {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .btn-type {
-      font-size: clamp(0.46rem, 1.6vw, 0.56rem);
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--cv-muted);
-      font-weight: 700;
+    /* Brief copy confirmation. Sits below the card, never over the
+       artwork, so it doesn't violate "no visible HTML text over image". */
+    .copy-toast {
+      margin-top: 10px;
       font-family: Arial, Helvetica, sans-serif;
-      white-space: nowrap;
-    }
-
-    .btn-value {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: clamp(0.72rem, 2.9vw, 0.88rem);
-      font-weight: 500;
-      color: var(--cv-text);
-      word-break: break-all;
-    }
-
-    /* ===== Save contact ===== */
-
-    .btn-save-wrap {
-      width: 58%;
-      margin: 0.5% auto 0;
-      flex-shrink: 0;
-    }
-
-    .btn-save {
-      position: relative;
-      display: block;
-      width: 100%;
-      cursor: pointer;
-      border: 0;
-      background: none;
-      padding: 0;
-    }
-
-    .btn-save-bg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .btn-save-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4%;
-    }
-
-    .btn-save-icon {
-      width: 11%;
-      height: auto;
-    }
-
-    .btn-save-text {
-      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 1.6px;
-      font-size: clamp(0.78rem, 3.1vw, 0.92rem);
-      text-transform: uppercase;
-      color: var(--cv-gold);
-      white-space: nowrap;
+      letter-spacing: 0.04em;
+      color: #2D5016;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
     }
-
-    /* ===== Footer (inside card) ===== */
-
-    .card-footer {
-      width: 100%;
-      text-align: center;
-      margin-top: auto;
-      padding-top: 0.2%;
-      padding-bottom: 1.2%;
-      flex-shrink: 0;
-    }
-    .card-footer a {
-      display: inline-flex;
-      align-items: center;
-      font-size: clamp(0.5rem, 1.9vw, 0.6rem);
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(42,35,24,0.55);
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-    .card-footer a:hover { color: rgba(42,35,24,0.85); }
-    .card-footer img {
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      vertical-align: -2px;
-      margin-right: 5px;
-    }
+    .copy-toast.show { opacity: 1; }
   </style>
 </head>
 <body>
 
-  <div class="card-cv">
-    <img class="card-bg" src="images/coordenada-card-v2/card-background.webp" alt="">
+  <div class="cv-card" aria-label="Tarjeta digital de Martha Domínguez — Coordenada Viajes">
+    <img
+      class="cv-card-art"
+      src="images/coordenada-card/coordenada-card-approved-exact-430.webp"
+      srcset="images/coordenada-card/coordenada-card-approved-exact-430.webp 430w, images/coordenada-card/coordenada-card-approved-exact.webp 984w"
+      sizes="(max-width: 430px) 100vw, 430px"
+      alt=""
+      draggable="false"
+    >
 
-    <div class="content">
+    <!-- transparent interactive overlays only; positions measured from the locked 984x1599 reference -->
 
-      <img class="header-lockup" src="images/coordenada-card-v2/header-lockup.webp" alt="Coordenada Viajes — Viajes que conectan — Agencia de Viajes">
+    <a class="hotspot" href="https://wa.me/5215517284050" target="_blank" rel="noopener noreferrer"
+       style="left:15.2439%; top:54.9093%; width:66.7683%; height:6.1914%;"
+       aria-label="WhatsApp +52 55 1728 4050"></a>
 
-      <div class="lower-stack">
+    <a class="hotspot" href="https://www.instagram.com/coordenada.viajes/" target="_blank" rel="noopener noreferrer"
+       style="left:15.2439%; top:61.7261%; width:66.7683%; height:6.1914%;"
+       aria-label="Instagram @coordenadaviajes"></a>
 
-      <div class="identity">
-        <h1 class="name">Martha Domínguez</h1>
-        <p class="role">Asesora de Viajes</p>
-        <p class="tagline">Tu destino tiene una coordenada.</p>
-        <img class="flourish" src="images/coordenada-card/webp-400/divider-starburst.webp" srcset="images/coordenada-card/webp-400/divider-starburst.webp 400w, images/coordenada-card/webp-800/divider-starburst.webp 800w" sizes="64px" alt="">
-      </div>
+    <a class="hotspot" href="https://coordenadaviajes.com" target="_blank" rel="noopener noreferrer"
+       style="left:15.2439%; top:68.5428%; width:66.7683%; height:6.1914%;"
+       aria-label="Sitio web coordenadaviajes.com"></a>
 
-      <div class="contact">
+    <button type="button" class="hotspot" onclick="copyClabeCV(this)"
+       style="left:15.2439%; top:75.3596%; width:66.7683%; height:6.1914%;"
+       aria-label="Copiar CLABE interbancaria BBVA 012180015019864949">
+      <span class="sr-only" id="clabe-cv">012180015019864949</span>
+    </button>
 
-        <a class="btn" href="https://wa.me/5215517284050" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +52 55 1728 4050">
-          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
-          <span class="btn-inner">
-            <img class="btn-icon" src="images/coordenada-card-v2/icon-whatsapp.webp" alt="">
-            <span class="btn-label">
-              <span class="btn-type">WhatsApp</span>
-              <span class="btn-value">+52 55 1728 4050</span>
-            </span>
-          </span>
-        </a>
+    <button type="button" class="hotspot" onclick="saveContactCV()"
+       style="left:13.7195%; top:82.9894%; width:70.3252%; height:5.6911%;"
+       aria-label="Guardar contacto"></button>
 
-        <a class="btn" href="https://www.instagram.com/coordenada.viajes/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @coordenada.viajes">
-          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
-          <span class="btn-inner">
-            <img class="btn-icon" src="images/coordenada-card-v2/icon-instagram.webp" alt="">
-            <span class="btn-label">
-              <span class="btn-type">Instagram</span>
-              <span class="btn-value">@coordenada.viajes</span>
-            </span>
-          </span>
-        </a>
+    <a class="hotspot" href="https://www.eurekawebsites.tech/" target="_blank" rel="noopener noreferrer"
+       style="left:24.5935%; top:90.7442%; width:50.8130%; height:4.2527%;"
+       aria-label="Eureka Tech"></a>
 
-        <a class="btn" href="https://coordenadaviajes.com" target="_blank" rel="noopener noreferrer" aria-label="Sitio web coordenadaviajes.com">
-          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
-          <span class="btn-inner">
-            <img class="btn-icon" src="images/coordenada-card-v2/icon-website.webp" alt="">
-            <span class="btn-label">
-              <span class="btn-type">Sitio web</span>
-              <span class="btn-value">coordenadaviajes.com</span>
-            </span>
-          </span>
-        </a>
-
-        <button class="btn" onclick="copyClabeCV(this)" type="button" aria-label="Copiar CLABE interbancaria BBVA">
-          <img class="btn-row-bg" src="images/coordenada-card-v2/contact-row-bg.webp" alt="">
-          <span class="btn-inner">
-            <img class="btn-icon" src="images/coordenada-card-v2/icon-bank.webp" alt="">
-            <span class="btn-label">
-              <span class="btn-type">Clabe interbancaria BBVA</span>
-              <span class="btn-value" id="clabe-cv">012180015019864949</span>
-            </span>
-          </span>
-        </button>
-
-      </div>
-
-      <div class="btn-save-wrap">
-        <button class="btn-save" onclick="saveContactCV()" type="button" aria-label="Guardar contacto">
-          <img class="btn-save-bg" src="images/coordenada-card-v2/save-contact-bg.webp" alt="">
-          <span class="btn-save-inner">
-            <img class="btn-save-icon" src="images/coordenada-card-v2/icon-save-contact.webp" alt="">
-            <span class="btn-save-text">Guardar contacto</span>
-          </span>
-        </button>
-      </div>
-
-      <div class="card-footer">
-        <a href="https://www.eurekawebsites.tech/" target="_blank" rel="noopener noreferrer">
-          <img src="images/eureka/eureka-b-64.png" alt="">POWERED BY EUREKA TECH
-        </a>
-      </div>
-
-      </div>
-    </div>
   </div>
+
+  <p class="copy-toast" id="copy-toast" role="status" aria-live="polite">¡CLABE copiada!</p>
 
   <script>
     function copyClabeCV(btn) {
       navigator.clipboard.writeText('012180015019864949').then(function() {
-        var el = btn.querySelector('#clabe-cv');
-        var orig = el.textContent;
-        el.textContent = '¡Copiado!';
-        setTimeout(function() { el.textContent = orig; }, 2000);
+        showCopyToast();
       }).catch(function() {
         var range = document.createRange();
         range.selectNode(btn.querySelector('#clabe-cv'));
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(range);
+        showCopyToast();
       });
+    }
+
+    function showCopyToast() {
+      var toast = document.getElementById('copy-toast');
+      toast.classList.add('show');
+      clearTimeout(showCopyToast._t);
+      showCopyToast._t = setTimeout(function() {
+        toast.classList.remove('show');
+      }, 2000);
     }
 
     function saveContactCV() {
