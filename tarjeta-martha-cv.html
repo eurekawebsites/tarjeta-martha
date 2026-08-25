@@ -40,6 +40,10 @@
       border: 0;
     }
 
+    html, body {
+      min-height: 100%;
+    }
+
     body {
       min-height: 100vh;
       min-height: 100dvh;
@@ -50,8 +54,18 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #E8DFC8;
+      background:
+        url("images/coordenada-card/page-background-light-desktop.webp")
+        center center / cover fixed no-repeat;
       padding: 24px 12px;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        background-image:
+          url("images/coordenada-card/page-background-light-mobile.webp");
+        background-attachment: scroll;
+      }
     }
 
     /* ===== Card =====
